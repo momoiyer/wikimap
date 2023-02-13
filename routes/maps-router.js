@@ -34,6 +34,19 @@ router.get('/all', (req, res) => {
     });
 });
 
+//change this to get user id from session later
+router.get('/mymaps', (req, res) => {
+  mapQueries.getMyMaps(10)
+    .then(maps => {
+      res.json({ maps });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
 router.get('/:mapid/edit', (req, res) => {
   const mapId = req.params.mapid;
   mapQueries.getMapDetailsByMapId(mapId)
@@ -48,7 +61,7 @@ router.get('/:mapid/edit', (req, res) => {
 });
 
 
-//change this to get user id from session later and merge with /all route
+//change this to get user id from session later and merge with /:mapid route
 router.get('/:mapid/:userId', (req, res) => {
   const mapId = req.params.mapid;
   const userId = req.params.userId;
