@@ -32,4 +32,17 @@ router.get('/all', (req, res) => {
     });
 });
 
+//change this to get user id from session later and merge with /all route
+router.get('/all/:userId', (req, res) => {
+  mapQueries.getAllMapsDetailsByUserId(req.params.userId)
+    .then(maps => {
+      res.json({ maps });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
 module.exports = router;
