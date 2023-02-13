@@ -7,6 +7,7 @@
 const express = require('express');
 const router = express.Router();
 const mapQueries = require('../db/queries/maps-queries');
+const pointQueries = require('../db/queries/points-queries');
 
 //change this to get user id from session later and merge with /all route
 router.get('/all/:userId', (req, res) => {
@@ -39,7 +40,7 @@ router.get('/:mapid/:userId', (req, res) => {
   const mapId = req.params.mapid;
   const userId = req.params.userId;
   const mapPromise = mapQueries.getMapDetailsByMapIdNUserId(mapId, userId);
-  const pointPromise = mapQueries.getPointsDetailsByMapId(mapId);
+  const pointPromise = pointQueries.getPointsDetailsByMapId(mapId);
   Promise.all([mapPromise, pointPromise])
     .then(results => {
       res.json({ results });
