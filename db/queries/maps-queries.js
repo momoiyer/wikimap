@@ -1,9 +1,6 @@
 const db = require('../connection');
 const { DEFAULT_POINT_IMAGE_URL } = require('../../constant.js');
 
-
-// console.log("default: ", DEFAULT_POINT_IMAGE_URL);
-
 const getMaps = () => {
   return db.query(`SELECT * FROM maps;`)
     .then(data => {
@@ -14,8 +11,8 @@ const getMaps = () => {
     });
 };
 
-//get map data for home page of non-logged in user
-const getAllMapsDetails = () => {
+//get map display data for home page of non-logged in user
+const getAllMaps = () => {
   const query = `
   SELECT maps.*, users.name as onwer_name,
     CASE WHEN images.image_url IS NULL
@@ -28,10 +25,12 @@ const getAllMapsDetails = () => {
     SELECT DISTINCT map_id, image_url
     FROM points
     WHERE image_url <> $1) as images
-      ON maps.id = images.map_id
+    ON maps.id = images.map_id
   ORDER BY created_date;
   `;
-  return db.query(query, [`'${DEFAULT_POINT_IMAGE_URL}'`])
+  const param = [`${DEFAULT_POINT_IMAGE_URL}`];
+
+  return db.query(query, param)
     .then(data => {
       return data.rows;
     })
@@ -40,8 +39,8 @@ const getAllMapsDetails = () => {
     });
 };
 
-//get map data for home page of logged in user
-const getAllMapsDetailsByUserId = (userId) => {
+//get map display data for home page of logged in user
+const getAllMapsByUserId = (userId) => {
   const query = `
   SELECT maps.*, users.name as onwer_name,
     CASE WHEN images.image_url IS NULL
@@ -65,7 +64,70 @@ const getAllMapsDetailsByUserId = (userId) => {
       ON maps.id = favouriteMaps.map_id
   ORDER BY created_date;
   `;
-  return db.query(query, [`'${DEFAULT_POINT_IMAGE_URL}'`, userId])
+
+  const param = [`${DEFAULT_POINT_IMAGE_URL}`, userId];
+
+  return db.query(query, param)
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+//get map detail data by mapId for map detail page of non-logged in user
+const getMapDetailsByMapId = (mapId) => {
+  const query = `
+    SELECT maps.*, users.name as onwer_name
+    FROM maps
+    JOIN users
+      ON users.id = maps.owner_id
+    WHERE maps.id = $1
+  `;
+  return db.query(query, [mapId])
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+//get map detail data by mapId for map detail page of logged in user
+const getMapDetailsByMapIdNUserId = (mapId, userId) => {
+  const query = `
+    SELECT maps.*, users.name as onwer_name,
+      CASE WHEN favouriteMaps.map_id IS NULL
+      THEN FALSE
+      ELSE TRUE END as isFavourite
+    FROM maps
+    JOIN users
+      ON users.id = maps.owner_id
+    LEFT JOIN (
+    SELECT map_id
+    FROM favourites
+    WHERE user_id = $2) as favouriteMaps
+      ON maps.id = favouriteMaps.map_id
+    WHERE maps.id = $1
+  `;
+  return db.query(query, [mapId, userId])
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+//get point detail data by mapId for map detail page of any type of user
+const getPointsDetailsByMapId = (mapId) => {
+  const query = `
+    SELECT points.*
+    FROM points
+    WHERE map_id = $1;
+  `;
+  return db.query(query, [mapId])
     .then(data => {
       return data.rows;
     })
@@ -76,6 +138,9 @@ const getAllMapsDetailsByUserId = (userId) => {
 
 module.exports = {
   getMaps,
-  getAllMapsDetails,
-  getAllMapsDetailsByUserId
+  getAllMaps,
+  getAllMapsByUserId,
+  getMapDetailsByMapId,
+  getMapDetailsByMapIdNUserId,
+  getPointsDetailsByMapId,
 };
