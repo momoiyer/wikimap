@@ -34,6 +34,19 @@ router.get('/all', (req, res) => {
     });
 });
 
+router.get('/:mapid/edit', (req, res) => {
+  const mapId = req.params.mapid;
+  mapQueries.getMapDetailsByMapId(mapId)
+    .then(results => {
+      res.json({ results });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
 
 //change this to get user id from session later and merge with /all route
 router.get('/:mapid/:userId', (req, res) => {
@@ -44,16 +57,26 @@ router.get('/:mapid/:userId', (req, res) => {
   Promise.all([mapPromise, pointPromise])
     .then(results => {
       res.json({ results });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
     });
 });
 
 router.get('/:mapid', (req, res) => {
   const mapId = req.params.mapid;
   const mapPromise = mapQueries.getMapDetailsByMapId(mapId);
-  const pointPromise = mapQueries.getPointsDetailsByMapId(mapId);
+  const pointPromise = pointQueries.getPointsDetailsByMapId(mapId);
   Promise.all([mapPromise, pointPromise])
     .then(results => {
       res.json({ results });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
     });
 });
 
