@@ -6,5 +6,5 @@ CREATE TABLE maps (
   description TEXT,
   created_date DATE DEFAULT NOW(),
   delete_status BOOLEAN DEFAULT FALSE,
-  owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL
   );

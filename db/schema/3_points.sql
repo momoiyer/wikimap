@@ -9,5 +9,5 @@ CREATE TABLE points (
   lat DECIMAL NOT NULL,
   lon DECIMAL NOT NULL,
   image_url VARCHAR(355) DEFAULT 'https://cdn.pixabay.com/photo/2022/04/24/08/08/park-7153125__340.png',
-  map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE
+  map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE NOT NULL
   );
