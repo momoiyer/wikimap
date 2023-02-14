@@ -12,6 +12,8 @@ $(() => {
   });
 
   $("#btnLogin").click(function() {
+    //pass user id from the input?
+    //do we need this?
     logIn(10);
     alert("User Logged In");
   });
