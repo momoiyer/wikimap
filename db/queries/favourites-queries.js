@@ -18,19 +18,50 @@ const getFavouriteMapIdsAsArrayByUserId = (userId) => {
   })
 };
 
-//for userpage carousel
+//for userpage carousel, and my favourites page
+
 const getMapDetailsForFavouriteMapsByUserId = (userId) => {
-  return db.query()
+  return db.query( `
+  SELECT maps.*, users.name as onwer_name,
+    CASE WHEN images.image_url IS NULL
+    THEN $1
+    ELSE images.image_url
+    END as image_url,
+    CASE WHEN favouriteMaps.map_id IS NULL
+    THEN FALSE
+    ELSE TRUE END as isFavourite
+  FROM maps
+  JOIN users ON users.id = maps.owner_id
+  LEFT JOIN (
+    SELECT DISTINCT map_id, image_url
+    FROM points
+    WHERE image_url <> $1) as images
+      ON maps.id = images.map_id
+  LEFT JOIN (
+    SELECT map_id
+    FROM favourites
+    WHERE user_id = $2) as favouriteMaps
+      ON maps.id = favouriteMaps.map_id
+  WHERE maps.id IN (
+    SELECT maps.id FROM maps
+    JOIN favourites ON maps.id = favourites.map_id
+    WHERE favourites.user_id = $2 AND map.delete_status = FALSE
+  )
+  ORDER BY created_date;
+  `, [DEFAULT_POINT_IMAGE_URL, userId])
   .then(data => {
     return data.rows;
   })
   .catch(err => {
-    return console.err(err);
+    return console.error(err);
   })
 };
 
+//for click handler post route
 const removeMapFromFavouritesByUserId = (userId, mapId) => {
-  return db.query()
+  return db.query(`DELETE FROM favourites
+  WHERE user_id = $1 AND map_id =$2
+  RETURNING*;`, [userId, mapId])
   .then(data => {
     return data.rows;
   })
@@ -39,8 +70,11 @@ const removeMapFromFavouritesByUserId = (userId, mapId) => {
   })
 };
 
+//for click handler post route
 const addMapToFavouritesByUserId = (userId, mapId) => {
-  return db.query()
+  return db.query(`INSERT INTO favourites (user_id, map_id)
+  VALUES ($1, $2)
+  RETURNING*;`, [userId, mapId])
   .then(data => {
     return data.rows;
   })
@@ -53,5 +87,5 @@ module.exports = {
   getFavouriteMapIdsAsArrayByUserId,
   getMapDetailsForFavouriteMapsByUserId,
   removeMapFromFavouritesByUserId,
-  addMapToFavouritesByUserId
+  addMapToFavouritesByUserId,
 };
