@@ -16,7 +16,7 @@ const getPointsDetailsByMapId = (mapId) => {
     });
 };
 
-const addPoints = (body) => {
+const addPoint = (body) => {
 
   let columnName = "title, address_line_1, address_line_2, lat, lon, map_id,";
   let columnValue = `'${body.title}','${body.address_line_1}','${body.address_line_2}',${body.lat},${body.lon},${body.map_id},`;
@@ -91,8 +91,22 @@ const updatePoint = (pointId, body) => {
     });
 };
 
+const deletePoint = (pointId) => {
+  const query = `
+  DELETE FROM points WHERE points.id = $1;
+  `;
+  return db.query(query, [pointId])
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
 module.exports = {
   getPointsDetailsByMapId,
-  addPoints,
+  addPoint,
   updatePoint,
+  deletePoint,
 };

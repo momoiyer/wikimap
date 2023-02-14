@@ -18,8 +18,8 @@ router.post('/new', (req, res) => {
   };
   console.log("body in route:", body);
   pointQueries.addPoints(body)
-    .then(map => {
-      res.json({ map });
+    .then(point => {
+      res.json({ point });
     })
     .catch(err => {
       res
@@ -28,27 +28,27 @@ router.post('/new', (req, res) => {
     });
 });
 
-// router.post('/:mapid/delete', (req, res) => {
-//   const mapId = req.params.mapid;
-//   mapQueries.deleteMap(mapId)
-//     .then(map => {
-//       res.json({ map });
-//     })
-//     .catch(err => {
-//       res
-//         .status(500)
-//         .json({ error: err.message });
-//     });
-// });
-
 //change this to get body from req.body
 router.post('/:pointId', (req, res) => {
   const pointId = req.params.pointId;
   // const updateBody = req.body;
   const body = { title: 'Edited Title', description: 'Edited Description' };
   pointQueries.updatePoint(pointId, body)
-    .then(map => {
-      res.json({ map });
+    .then(point => {
+      res.json({ point });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+router.delete('/:pointId/delete', (req, res) => {
+  const pointId = req.params.pointId;
+  pointQueries.deletePoint(pointId)
+    .then(point => {
+      res.json({ point });
     })
     .catch(err => {
       res
