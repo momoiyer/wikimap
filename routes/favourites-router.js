@@ -22,7 +22,6 @@ router.get('/', (req, res) => {
 
 
 
-//havent tested because we need html on click, may need to use this in client side instead?
 // adds mapid and user id to favourites
 router.post('/:mapid', (req, res) => {
   const userId = req.session.userid;
@@ -39,7 +38,7 @@ router.post('/:mapid', (req, res) => {
 
 })
 
-//havent tested because we need html on click, may need to use this in client side instead?
+
 // adds mapid and user id to favourites
 router.delete('/:mapid', (req, res) => {
   const userId = req.session.userid;

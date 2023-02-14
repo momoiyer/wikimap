@@ -71,7 +71,7 @@ const getMapDetailsForContributedMapsByUserId = (userId) => {
 };
 
 //for the manage contributors section on map details page
-const removeContributorsFromMap = (userId, mapId) => {
+const removeContributorsFromMapByUserId = (userId, mapId) => {
   return db.query(`DELETE FROM contributors
   WHERE user_id = $1 AND map_id =$2
   RETURNING;`, [userId, mapId])
@@ -83,6 +83,9 @@ const removeContributorsFromMap = (userId, mapId) => {
   })
 };
 
+//get username by id function in user-queries file
+
+//may need to first get userId by name, instead of by cookie based on form data
 const addContributorsToMapByUserId = (userId, mapId) => {
   return db.query(`INSERT INTO contributors (user_id, map_id)
   VALUES ($1, $2)
@@ -94,6 +97,14 @@ const addContributorsToMapByUserId = (userId, mapId) => {
     return console.err(err);
   })
 };
+
+
+
+const getUserIdByName = (userId) => {
+
+}
+
+
 
 const getContributorsByMapId = (mapId) => {
   return db.query(`SELECT users.name

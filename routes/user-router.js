@@ -6,6 +6,7 @@ const router = express.Router();
 const userQueries = require(`../db/queries/user-queries`);
 const contributorsQueries = require(`../db/queries/contributors-queries`);
 const favouritesQueries = require(`../db/queries/favourites-queries`);
+const mapQueries = require(`../db/queries/maps-queries`);
 
 router.get(`/login/:userid`, (req, res) => {
 
@@ -22,12 +23,11 @@ router.get(`/`, (req, res) => {
 
   //returns user info
   const userPromise = userQueries.getUserProfileByUserId(userId);
-
-  //returns array of mapIds from a userId
+  //returns details for all map categories based on user
   const contributorPromise = contributorsQueries.getMapDetailsForContributedMapsByUserId(userId);
   const favePromise = favouritesQueries.getMapDetailsForFavouriteMapsByUserId(userId);
-
-  Promise.all([userPromise, contributorPromise, favePromise])
+  const myMapsPromise = userQueries.getMyMapDetailsByUserId(userId)
+  Promise.all([userPromise, contributorPromise, favePromise, myMapsPromise])
     .then(results => {
       res.json({ results });
     })
@@ -37,11 +37,10 @@ router.get(`/`, (req, res) => {
         .json({ error: err.message });
     });
 
-
-
 });
 
-
+//may need to change the location of the logout route
+//from /users/loguout to maps/logout so that we can redirect to home page?
 
 router.post('/logout', (req, res) => {
   req.session = null;
