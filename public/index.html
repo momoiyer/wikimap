@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta Information -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasure Map - Home Page</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      type="text/css" />
+    <link rel="stylesheet" href="../styles/leaflet-style.scss"/>
+
+    <!-- Custom Fonts -->
+
+    <!-- Logos -->
+
+    <!-- App CSS -->
+
+    <!-- External JS -->
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- leaflet Setup -->
+    <link rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""></script>
+
+    <!--Internal JS-->
+    <script type="text/javascript" src="./scripts/network.js"></script>
+    <script type="text/javascript" src="./scripts/app.js"></script>
+    <script type="text/javascript"
+      src="./scripts/components/user_profile_page.js"></script>
+    <!-- <script type="text/javascript" src="javascript/api/leaflet.js"></script>
+    <script type="text/javascript" src="javascript/api/reverse_geocoding.js"></script> -->
+  </head>
+  <body>
+    <div id="map"></div>
+    <section id="mapListings"></section>
+    <section id="userProfile"></section>
+
+
+    <button type="button" id="btnLogin">LogIn</button>
+    <button type="button" id="btnLogout">Logout</button>
+    <button type="button" id="btngetUserProfile">Get User Profile</button>
+  </body>
+</html>
