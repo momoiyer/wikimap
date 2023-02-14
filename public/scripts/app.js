@@ -1,26 +1,43 @@
 // Client facing scripts here
-$(() => {
-
-  //get all maps listing for home page
+// home page loading
+const $loadHomePage = function() {
   getAllMapListings().then(function(json) {
     console.log("json maps:", json);
-    $('#mapListings').append(`
-      <div>
-      <h1> Maps are here!</h1>
-      </div>
-    `);
+    views_manager.show('allMapListings');
   });
+};
+
+$(() => {
+  const $allMapListingPage = $(`
+      <div>
+        <h1> Maps are here!</h1>
+
+      <button type="button" id="btngetmapDetails">Get Details of this Maps</button>
+      </div>
+  `);
+
+  window.$allMapListingPage = $allMapListingPage;
+
+  //get all maps listing for home page
+  $loadHomePage();
 
   $("#btnLogin").click(function() {
     //pass user id from the input?
     //do we need this?
     logIn(10);
     alert("User Logged In");
+    $loadHomePage();
   });
 
   $("#btnLogout").click(function() {
     logout();
     alert("User Logged Out");
+    $loadHomePage();
   });
+
+  $("#btnHome").click(function() {
+    $loadHomePage();
+  });
+
 
 });

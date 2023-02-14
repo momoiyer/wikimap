@@ -33,6 +33,7 @@
 
     <!--Internal JS-->
     <script type="text/javascript" src="./scripts/network.js"></script>
+    <script type="text/javascript" src="./scripts/views_manager.js"></script>
     <script type="text/javascript" src="./scripts/app.js"></script>
     <script type="text/javascript"
       src="./scripts/components/user_profile_page.js"></script>
@@ -48,24 +49,18 @@
     <script type="text/javascript" src="javascript/api/reverse_geocoding.js"></script> -->
   </head>
   <body>
-    <div id="map"></div>
-    <section id="mapListings"></section>
-    <section id="userProfile"></section>
-    <section id="myMaps"></section>
-    <section id="mapToEdit"></section>
-    <section id="mapDetails"></section>
-    <section id="myContributedMaps"></section>
-    <section id="contributors"></section>
-    <section id="myFavouriteMaps"></section>
+    <!-- <div id="map"></div> -->
+    <main id="main-content">
+      <section id="userProfile"></section>
+      <section id="myContributedMaps"></section>
+      <section id="myFavouriteMaps"></section>
 
-    <button type="button" id="btnLogin">LogIn</button>
-    <button type="button" id="btnLogout">Logout</button>
-    <button type="button" id="btngetUserProfile">Get User Profile</button>
-    <button type="button" id="btngetMyMaps">Get My Maps</button>
-    <button type="button" id="btngetMapToEdit">Edit this Maps</button>
-    <button type="button" id="btngetmapDetails">Get Details of this Maps</button>
-    <button type="button" id="btngetMyContributedMaps">Get My Contributed Maps</button>
-    <button type="button" id="btngetContributors">Get this Map's contirbutors</button>
-    <button type="button" id="btngetMyFavouriteMaps">Get My Favourite Maps</button>
-  </body>
-</html>
+      <button type="button" id="btnHome">Logo</button>
+      <button type="button" id="btngetUserProfile">USER PROFILE</button>
+      <button type="button" id="btngetMyMaps">MY MAPS</button>
+      <button type="button" id="btngetMyContributedMaps">MY CONTRIBUTIONS</button>
+      <button type="button" id="btngetMyFavouriteMaps">MY FAVOURITES</button>
+      <button type="button" id="btnLogin">LogIn</button>
+      <button type="button" id="btnLogout">Logout</button>
+    </body>
+  </html>

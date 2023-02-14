@@ -1,18 +1,28 @@
 $(() => {
 
-  $("#btngetmapDetails").click(function() {
+  const $mapDetailsPage = $(`
+      <div>
+        <h1> Map detail is here!</h1>
+
+        <section id="mapToEdit"></section>
+        <button type="button" id="btngetMapToEdit">Edit this Maps</button>
+
+        <section id="contributors"></section>
+        <button type="button" id="btngetContributors">Get this Map's contirbutors</button>
+      </div>
+  `);
+
+  window.$mapDetailsPage = $mapDetailsPage;
+
+  $('body').on('click', '#btngetmapDetails', function() {
     //pass map id from input
     getMapDetails(2).then(function(json) {
       console.log("json map details:", json);
-      $('#mapDetails').append(`
-      <div>
-      <h1> Map detail is here!</h1>
-      </div>
-    `);
+      views_manager.show('mapDetails');
     });
   });
 
-  $("#btngetMapToEdit").click(function() {
+  $('body').on('click', '#btngetMapToEdit', function() {
     //pass map id from input
     getMapToEdit(2).then(function(json) {
       console.log("json map to edit:", json);
@@ -24,10 +34,10 @@ $(() => {
     });
   });
 
-  $("#btngetContributors").click(function() {
+  $('body').on('click', '#btngetContributors', function() {
     //pass map id from input
     getContributors(2).then(function(json) {
-      console.log("json this map's contributor litst:", json);
+      console.log("json this map's contributor list:", json);
       $('#contributors').append(`
       <div>
       <h1> This Map's Contributor list is here!</h1>

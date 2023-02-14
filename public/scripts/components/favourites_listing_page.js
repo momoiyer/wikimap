@@ -1,12 +1,16 @@
 $(() => {
-  $("#btngetMyFavouriteMaps").click(function() {
+  const $myFavouriteMapPage = $(`
+      <div>
+      <h1> My Favourite Maps are here!</h1>
+      </div>
+  `);
+
+  window.$myFavouriteMapPage = $myFavouriteMapPage;
+
+  $('body').on('click', '#btngetMyFavouriteMaps', function() {
     getMyFavouriteMaps().then(function(json) {
       console.log("json favourite map:", json);
-      $('#myFavouriteMaps').append(`
-      <div>
-      <h1> My Favourite Map is here!</h1>
-      </div>
-    `);
+      views_manager.show('myFavouriteMap');
     });
   });
 });
