@@ -27,6 +27,7 @@ const getAllMapsDetails = () => {
     FROM points
     WHERE image_url <> $1) as images
     ON maps.id = images.map_id
+  WHERE delete_status = FALSE
   ORDER BY created_date;
   `;
   const param = [`${DEFAULT_POINT_IMAGE_URL}`];
@@ -63,6 +64,7 @@ const getAllMapsDetailsByUserId = (userId) => {
     FROM favourites
     WHERE user_id = $2) as favouriteMaps
       ON maps.id = favouriteMaps.map_id
+  WHERE delete_status = FALSE
   ORDER BY created_date;
   `;
 
@@ -144,7 +146,7 @@ const getMyMaps = (userId) => {
     FROM favourites
     WHERE user_id = $2) as favouriteMaps
       ON maps.id = favouriteMaps.map_id
-  WHERE owner_id = $2
+  WHERE owner_id = $2 AND delete_status = FALSE
   ORDER BY created_date;
   `;
 
