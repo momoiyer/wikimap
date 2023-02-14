@@ -18,3 +18,14 @@ INSERT INTO points
 VALUES
 ('Little Lougheed','Hard trail of 5km hike','Wind Ridge Tr','Town of Canmore, AB T1W 2W4, Canada',51.018693965427225, -115.30335032182762,2),
 ('Sparrowhawk Tarns','Moderate trail of 11km hike','The Orphan Route','Kananaskis Improvement District, AB T1W 2V3, Canada',51.00153291347325, -115.32276809423867,2);
+
+
+INSERT INTO points
+(title, description,address_line_1,address_line_2,lat,lon,map_id)
+VALUES
+('Deer Lake Park','Nice trails and great views, a good place to have a picnic','6588 Deer Lake Ave','Burnaby, BC, V5G 3T7, Canada',49.23834, -122.96891,4),
+('Blackie Spit','Lots of waterfowl and sometimes raptors','3136 McBride Ave','Surrey, BC, V4A 3E2, Canada',49.05882, -122.87911,4),
+('Cafe Postal','Best spot in St.Boniface, maybe walk along the river with your coffee.','202 Provencher Blvd','Winnipeg, MB, R2H 0G3, Canada',49.89229, -97.12097,3),
+('Thom Bargen Corydon','Realy cute interior, they also serve coffee cocktails','743 Corydon Ave','Winnipeg, MB, R3M 0W5, Canada',49.87268, -97.15266,3),
+('Little Sister Coffee Maker, South Osborne','Beautiful interior design, great in the summer for their lavendar soft serve','539 Osborne St','Winnipeg, MB, Canada',49.86602, -97.13491,3);
+
