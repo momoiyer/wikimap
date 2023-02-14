@@ -48,8 +48,27 @@ const addPoints = (body) => {
     });
 };
 
+const updatePoint = (pointId, body) => {
+  const query = `
+  UPDATE points
+  SET title = $1, description = $2
+  WHERE points.id = $3
+  RETURNING *;
+  `;
+
+  const param = [body.title, body.description, pointId];
+
+  return db.query(query, param)
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return err;
+    });
+};
 
 module.exports = {
   getPointsDetailsByMapId,
   addPoints,
+  updatePoint,
 };
