@@ -20,9 +20,13 @@ router.get(`/login/:userid`, (req, res) => {
 router.get(`/`, (req, res) => {
   const userId = req.session.userid;
 
+  //returns user info
   const userPromise = userQueries.getUserProfileByUserId(userId);
-  const contributorPromise = contributorsQueries.getContributedMapIdsAsArrayByUserId (userId);
-  const favePromise = favouritesQueries.getFavouriteMapIdsAsArrayByUserId(userId)
+
+  //returns array of mapIds from a userId
+  const contributorPromise = contributorsQueries.getMapDetailsForContributedMapsByUserId(userId);
+  const favePromise = favouritesQueries.getMapDetailsForFavouriteMapsByUserId(userId);
+
   Promise.all([userPromise, contributorPromise, favePromise])
     .then(results => {
       res.json({ results });
