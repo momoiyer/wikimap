@@ -1,5 +1,6 @@
 const db = require('../connection');
 const { DEFAULT_POINT_IMAGE_URL } = require('../../constant.js');
+const { query } = require('express');
 
 const getMaps = () => {
   return db.query(`SELECT * FROM maps;`)
@@ -158,6 +159,24 @@ const getMyMaps = (userId) => {
     });
 };
 
+const updateMap = (mapId, body) => {
+  const query = `
+  UPDATE maps
+  SET title = $1, description = $2
+  WHERE maps.id = $3
+  `;
+
+  const param = [body.title, body.description, mapId];
+
+  return db.query(query, param)
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
 module.exports = {
   getMaps,
   getAllMapsDetails,
@@ -165,4 +184,5 @@ module.exports = {
   getMapDetailsByMapId,
   getMapDetailsByMapIdNUserId,
   getMyMaps,
+  updateMap,
 };

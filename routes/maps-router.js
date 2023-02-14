@@ -105,5 +105,21 @@ router.get('/', (req, res) => {
     });
 });
 
+//change this to get body from req.body
+router.post('/:mapid', (req, res) => {
+  const mapId = req.params.mapid;
+  // const updateBody = req.body;
+  const body = { title: 'New Title', description: 'New Description' };
+  mapQueries.updateMap(mapId, body)
+    .then(map => {
+      res.json({ map });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
 
 module.exports = router;
