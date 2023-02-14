@@ -164,9 +164,32 @@ const updateMap = (mapId, body) => {
   UPDATE maps
   SET title = $1, description = $2
   WHERE maps.id = $3
+  RETURNING *;
   `;
 
   const param = [body.title, body.description, mapId];
+
+  return db.query(query, param)
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+const addMap = (userId, body) => {
+  console.log("userId:", userId);
+  console.log("body:", body);
+  const query = `
+  INSERT INTO maps
+  ( title, description, owner_id)
+  VALUES
+  ($1,$2,$3)
+  RETURNING *;
+  `;
+
+  const param = [body.title, body.description, userId];
 
   return db.query(query, param)
     .then(data => {
@@ -185,4 +208,5 @@ module.exports = {
   getMapDetailsByMapIdNUserId,
   getMyMaps,
   updateMap,
+  addMap,
 };
