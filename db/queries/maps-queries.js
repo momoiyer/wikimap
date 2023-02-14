@@ -12,7 +12,7 @@ const getMaps = () => {
 };
 
 //get map display data for home page of non-logged in user
-const getAllMaps = () => {
+const getAllMapsDetails = () => {
   const query = `
   SELECT maps.*, users.name as onwer_name,
     CASE WHEN images.image_url IS NULL
@@ -40,7 +40,7 @@ const getAllMaps = () => {
 };
 
 //get map display data for home page of logged in user
-const getAllMapsByUserId = (userId) => {
+const getAllMapsDetailsByUserId = (userId) => {
   const query = `
   SELECT maps.*, users.name as onwer_name,
     CASE WHEN images.image_url IS NULL
@@ -120,7 +120,6 @@ const getMapDetailsByMapIdNUserId = (mapId, userId) => {
     });
 };
 
-
 //get all maps owned by logged in user for My Maps page
 const getMyMaps = (userId) => {
   const query = `
@@ -159,12 +158,11 @@ const getMyMaps = (userId) => {
     });
 };
 
-
 module.exports = {
   getMaps,
-  getAllMaps,
-  getAllMapsByUserId,
+  getAllMapsDetails,
+  getAllMapsDetailsByUserId,
   getMapDetailsByMapId,
   getMapDetailsByMapIdNUserId,
-  getMyMaps
+  getMyMaps,
 };

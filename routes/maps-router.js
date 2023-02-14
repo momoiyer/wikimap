@@ -11,7 +11,7 @@ const pointQueries = require('../db/queries/points-queries');
 
 //change this to get user id from session later and merge with /all route
 router.get('/all/:userId', (req, res) => {
-  mapQueries.getAllMapsByUserId(req.params.userId)
+  mapQueries.getAllMapsDetailsByUserId(req.params.userId)
     .then(maps => {
       res.json({ maps });
     })
@@ -23,7 +23,7 @@ router.get('/all/:userId', (req, res) => {
 });
 
 router.get('/all', (req, res) => {
-  mapQueries.getAllMaps()
+  mapQueries.getAllMapsDetails()
     .then(maps => {
       res.json({ maps });
     })
