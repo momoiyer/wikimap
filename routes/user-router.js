@@ -41,10 +41,11 @@ router.get(`/`, (req, res) => {
 
 //may need to change the location of the logout route
 //from /users/loguout to maps/logout so that we can redirect to home page?
+//would like to change to post so we can redirect, but for now it just clears cookie
 
-router.post('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
   req.session = null;
-  res.redirect('/')
+  res.send('logged out')
 });
 
 

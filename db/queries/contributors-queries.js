@@ -27,7 +27,7 @@ const getContributedMapIdsAsArrayByUserId = (userId) => {
     return mapIds;
   })
   .catch(err => {
-    return console.err(err);
+    return console.error(err);
   })
 };
 
@@ -57,9 +57,10 @@ const getMapDetailsForContributedMapsByUserId = (userId) => {
       ON maps.id = favouriteMaps.map_id
   WHERE maps.id IN (
     SELECT maps.id FROM maps
-    JOIN contributors ON maps.id = contributors.map_id
-    WHERE contributors.user_id = $2 AND map.delete_status = FALSE
-  )
+    LEFT JOIN contributors ON maps.id = contributors.map_id
+    WHERE contributors.user_id = $2
+    )
+    AND maps.delete_status = FALSE
   ORDER BY created_date;
   `, [DEFAULT_POINT_IMAGE_URL, userId])
   .then(data => {
@@ -74,12 +75,12 @@ const getMapDetailsForContributedMapsByUserId = (userId) => {
 const removeContributorsFromMapByUserId = (userId, mapId) => {
   return db.query(`DELETE FROM contributors
   WHERE user_id = $1 AND map_id =$2
-  RETURNING;`, [userId, mapId])
+  RETURNING*;`, [userId, mapId])
   .then(data => {
     return data.rows;
   })
   .catch(err => {
-    return console.err(err);
+    return console.error(err);
   })
 };
 
@@ -94,7 +95,7 @@ const addContributorsToMapByUserId = (userId, mapId) => {
     return data.rows;
   })
   .catch(err => {
-    return console.err(err);
+    return console.error(err);
   })
 };
 

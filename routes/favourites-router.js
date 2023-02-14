@@ -7,7 +7,7 @@ const favouritesQueries = require(`../db/queries/favourites-queries`);
 
 router.get('/', (req, res) => {
   const userId = req.session.userid;
-  console.log("userId cookie", req.session.userid)
+  //console.log("userId cookie", req.session.userid)
   favouritesQueries.getMapDetailsForFavouriteMapsByUserId(userId)
     .then(faveMaps => {
       res.json({ faveMaps});
@@ -28,7 +28,9 @@ router.post('/:mapid', (req, res) => {
   const mapId = req.params.mapid;
   favouritesQueries.addMapToFavouritesByUserId(userId, mapId)
     .then(addedRow => {
-      res.sendStatus(201);
+      res
+      .json(addedRow)
+      .sendStatus(201);
     })
     .catch(err => {
       res
@@ -45,6 +47,7 @@ router.delete('/:mapid', (req, res) => {
   const mapId = req.params.mapid;
   favouritesQueries.removeMapFromFavouritesByUserId(userId, mapId)
     .then(deletedRow => {
+      res.json(deletedRow)
       res.sendStatus(201);
     })
     .catch(err => {

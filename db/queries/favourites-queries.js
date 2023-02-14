@@ -44,9 +44,10 @@ const getMapDetailsForFavouriteMapsByUserId = (userId) => {
       ON maps.id = favouriteMaps.map_id
   WHERE maps.id IN (
     SELECT maps.id FROM maps
-    JOIN favourites ON maps.id = favourites.map_id
-    WHERE favourites.user_id = $2 AND map.delete_status = FALSE
+    LEFT JOIN favourites ON maps.id = favourites.map_id
+    WHERE favourites.user_id = $2
   )
+  AND maps.delete_status = FALSE
   ORDER BY created_date;
   `, [DEFAULT_POINT_IMAGE_URL, userId])
   .then(data => {

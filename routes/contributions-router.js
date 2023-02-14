@@ -5,6 +5,21 @@ const userQueries = require(`../db/queries/user-queries`);
 const contributorsQueries = require(`../db/queries/contributors-queries`);
 const favouritesQueries = require(`../db/queries/favourites-queries`);
 
+//show maps and details for all of the users contributed maps
+router.get('/', (req, res) => {
+  const userId = req.session.userid;
+  //console.log("userId cookie", req.session.userid)
+  contributorsQueries.getMapDetailsForContributedMapsByUserId(userId)
+    .then(sharedMaps => {
+      res.json({ sharedMaps });
+      //returns an array of each map
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
 
 //shows list of contributors for a specific map for manage contributions section
 router.get('/:mapid', (req, res) => {
@@ -23,21 +38,6 @@ router.get('/:mapid', (req, res) => {
   });
 });
 
-//show maps and details for all of the users contributed maps
-router.get('/', (req, res) => {
-  const userId = req.session.userid;
-  //console.log("userId cookie", req.session.userid)
-  contributorsQueries.getMapDetailsForContributedMapsByUserId(userId)
-    .then(sharedMaps => {
-      res.json({ sharedMaps });
-      //returns an array of each map
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-});
 
 
 //may need to first get userId by name, instead of by cookie based on form data
