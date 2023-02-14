@@ -1,5 +1,6 @@
 const db = require('../connection');
 const { DEFAULT_POINT_IMAGE_URL } = require('../../constant.js');
+const { user } = require('pg/lib/defaults');
 
 // const getMaps = () => {
 //   return db.query(`SELECT * FROM maps;`)
@@ -12,8 +13,7 @@ const { DEFAULT_POINT_IMAGE_URL } = require('../../constant.js');
 // };
 
 
-//might want to change to data value to mapid
-//so we can use the answer to populate map details?
+
 
 const getContributedMapIdsAsArrayByUserId = (userId) => {
   return db.query(`SELECT maps.id FROM maps
@@ -31,33 +31,50 @@ const getContributedMapIdsAsArrayByUserId = (userId) => {
   })
 };
 
-//for manage contributors section
-const getContributorsByMapId = (mapId) => {
-  return db.query(`SELECT users.name
-  FROM contributors
-  LEFT JOIN users ON users.id = contributors.user_id
-  WHERE map_id = $1;`, [mapId])
-  .then(data => {
-    return data.rows;
-  })
-  .catch(err => {
-    return console.err(err);
-  })
-};
+
 
 const getMapDetailsForContributedMapsByUserId = (userId) => {
-  return db.query()
+  return db.query( `
+  SELECT maps.*, users.name as onwer_name,
+    CASE WHEN images.image_url IS NULL
+    THEN $1
+    ELSE images.image_url
+    END as image_url,
+    CASE WHEN favouriteMaps.map_id IS NULL
+    THEN FALSE
+    ELSE TRUE END as isFavourite
+  FROM maps
+  JOIN users ON users.id = maps.owner_id
+  LEFT JOIN (
+    SELECT DISTINCT map_id, image_url
+    FROM points
+    WHERE image_url <> $1) as images
+      ON maps.id = images.map_id
+  LEFT JOIN (
+    SELECT map_id
+    FROM favourites
+    WHERE user_id = $2) as favouriteMaps
+      ON maps.id = favouriteMaps.map_id
+  WHERE maps.id IN (
+    SELECT maps.id FROM maps
+    JOIN contributors ON maps.id = contributors.map_id
+    WHERE contributors.user_id = $2 AND map.delete_status = FALSE
+  )
+  ORDER BY created_date;
+  `, [DEFAULT_POINT_IMAGE_URL, userId])
   .then(data => {
     return data.rows;
   })
   .catch(err => {
-    return console.err(err);
+    return console.error(err);
   })
 };
 
 //for the manage contributors section on map details page
-const removeContributorsFromMapByUserId = (userId, mapId) => {
-  return db.query()
+const removeContributorsFromMap = (userId, mapId) => {
+  return db.query(`DELETE FROM contributors
+  WHERE user_id = $1 AND map_id =$2
+  RETURNING;`, [userId, mapId])
   .then(data => {
     return data.rows;
   })
@@ -67,7 +84,22 @@ const removeContributorsFromMapByUserId = (userId, mapId) => {
 };
 
 const addContributorsToMapByUserId = (userId, mapId) => {
-  return db.query()
+  return db.query(`INSERT INTO contributors (user_id, map_id)
+  VALUES ($1, $2)
+  RETURNING*;`, [userId, mapId])
+  .then(data => {
+    return data.rows;
+  })
+  .catch(err => {
+    return console.err(err);
+  })
+};
+
+const getContributorsByMapId = (mapId) => {
+  return db.query(`SELECT users.name
+  FROM contributors
+  LEFT JOIN users ON users.id = contributors.user_id
+  WHERE map_id = $1;`, [mapId])
   .then(data => {
     return data.rows;
   })

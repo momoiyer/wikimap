@@ -8,7 +8,7 @@ const favouritesQueries = require(`../db/queries/favourites-queries`);
 router.get('/', (req, res) => {
   const userId = req.session.userid;
   //console.log("userId cookie", req.session.userid)
-  contributorsQueries.getContributedMapsB (userId)
+  contributorsQueries.getMapDetailsForContributedMapsByUserId(userId)
     .then(sharedMaps => {
       res.json({ sharedMaps });
       //returns an array of each map
