@@ -200,6 +200,23 @@ const addMap = (userId, body) => {
     });
 };
 
+const deleteMap = (mapId) => {
+  const query = `
+  UPDATE maps
+  SET delete_status = TRUE
+  WHERE maps.id = $1
+  RETURNING *;
+  `;
+
+  return db.query(query, [mapId])
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
 module.exports = {
   getMaps,
   getAllMapsDetails,
@@ -209,4 +226,5 @@ module.exports = {
   getMyMaps,
   updateMap,
   addMap,
+  deleteMap,
 };

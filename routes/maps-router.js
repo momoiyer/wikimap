@@ -122,6 +122,19 @@ router.post('/new', (req, res) => {
     });
 });
 
+router.post('/:mapid/delete', (req, res) => {
+  const mapId = req.params.mapid;
+  mapQueries.deleteMap(mapId)
+    .then(map => {
+      res.json({ map });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
 //change this to get body from req.body
 router.post('/:mapid', (req, res) => {
   const mapId = req.params.mapid;
