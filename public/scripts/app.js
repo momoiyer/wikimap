@@ -1,22 +1,13 @@
 // Client facing scripts here
 // home page loading
-const $loadHomePage = function() {
-  getAllMapListings().then(function(json) {
-    console.log("json maps:", json);
-    views_manager.show('allMapListings');
-  });
-};
 
 $(() => {
-  const $allMapListingPage = $(`
-      <div>
-        <h1> Maps are here!</h1>
-
-      <button type="button" id="btngetmapDetails">Get Details of this Maps</button>
-      </div>
-  `);
-
-  window.$allMapListingPage = $allMapListingPage;
+  const $loadHomePage = function() {
+    getAllMapListings().then(function(json) {
+      console.log("json maps:", json);
+      views_manager.show('allMapListings');
+    });
+  };
 
   //get all maps listing for home page
   $loadHomePage();
@@ -38,6 +29,5 @@ $(() => {
   $("#btnHome").click(function() {
     $loadHomePage();
   });
-
 
 });
