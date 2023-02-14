@@ -161,15 +161,24 @@ const getMyMaps = (userId) => {
     });
 };
 
+//update map with user provided values
 const updateMap = (mapId, body) => {
   let updateStatement = "";
+  const updateValue = [mapId];
+
+  let i = 2;
 
   if (body.title) {
-    updateStatement += `title = '${body.title}',`;
+    updateStatement += `title = $${i},`;
+    updateValue.push(body.title);
+    i++;
   }
   if (body.description) {
-    updateStatement += `description = '${body.description}',`;
+    updateStatement += `description = $${i},`;
+    updateValue.push(body.description);
+    i++;
   }
+
   updateStatement = updateStatement.slice(0, -1);
 
   const query = `
@@ -179,9 +188,7 @@ const updateMap = (mapId, body) => {
   RETURNING *;
   `;
 
-  const param = [mapId];
-
-  return db.query(query, param)
+  return db.query(query, updateValue)
     .then(data => {
       return data.rows;
     })
@@ -190,9 +197,8 @@ const updateMap = (mapId, body) => {
     });
 };
 
+//add new map
 const addMap = (userId, body) => {
-  console.log("userId:", userId);
-  console.log("body:", body);
   const query = `
   INSERT INTO maps
   ( title, description, owner_id)
@@ -212,6 +218,7 @@ const addMap = (userId, body) => {
     });
 };
 
+//delete map (update delete_status)
 const deleteMap = (mapId) => {
   const query = `
   UPDATE maps

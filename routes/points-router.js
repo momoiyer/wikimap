@@ -16,8 +16,7 @@ router.post('/new', (req, res) => {
     map_id: 3,
     image_url: 'https://cdn.pixabay.com/photo/2016/06/11/05/20/maligne-lake-1449489_1280.jpg'
   };
-  console.log("body in route:", body);
-  pointQueries.addPoints(body)
+  pointQueries.addPoint(body)
     .then(point => {
       res.json({ point });
     })
@@ -44,7 +43,7 @@ router.post('/:pointId', (req, res) => {
     });
 });
 
-router.delete('/:pointId/delete', (req, res) => {
+router.delete('/:pointId', (req, res) => {
   const pointId = req.params.pointId;
   pointQueries.deletePoint(pointId)
     .then(point => {

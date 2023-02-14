@@ -16,30 +16,36 @@ const getPointsDetailsByMapId = (mapId) => {
     });
 };
 
+//Add new point
 const addPoint = (body) => {
 
   let columnName = "title, address_line_1, address_line_2, lat, lon, map_id,";
-  let columnValue = `'${body.title}','${body.address_line_1}','${body.address_line_2}',${body.lat},${body.lon},${body.map_id},`;
+
+  const columnValue = [body.title, body.address_line_1, body.address_line_2, body.lat, body.lon, body.map_id];
+  let columnValuePlaceHolder = '';
+
 
   if (body.description) {
     columnName += "description,";
-    columnValue += `'${body.description}',`;
+    columnValue.push(body.description);
   }
   if (body.image_url) {
     columnName += "image_url,";
-    columnValue += `'${body.image_url}',`;
+    columnValue.push(body.image_url);
   }
 
   columnName = columnName.slice(0, -1);
-  columnValue = columnValue.slice(0, -1);
+
+  columnValue.map((val, index) => columnValuePlaceHolder += `$${index + 1},`);
+  columnValuePlaceHolder = columnValuePlaceHolder.slice(0, -1);
 
   const query = `
   INSERT INTO points (${columnName})
-  VALUES (${columnValue})
+  VALUES (${columnValuePlaceHolder})
   RETURNING *;
   `;
 
-  return db.query(query)
+  return db.query(query, columnValue)
     .then(data => {
       return data.rows;
     })
@@ -48,29 +54,46 @@ const addPoint = (body) => {
     });
 };
 
+//Update point with user provided value
 const updatePoint = (pointId, body) => {
   let updateStatement = "";
+  const updateValue = [pointId];
+
+  let i = 2;
 
   if (body.title) {
-    updateStatement += `title = '${body.title}',`;
+    updateStatement += `title = $${i},`;
+    updateValue.push(body.title);
+    i++;
   }
   if (body.description) {
-    updateStatement += `description = '${body.description}',`;
+    updateStatement += `description = $${i},`;
+    updateValue.push(body.description);
+    i++;
   }
   if (body.address_line_1) {
-    updateStatement += `address_line_1 = '${body.address_line_1}',`;
+    updateStatement += `address_line_1 = $${i},`;
+    updateValue.push(body.address_line_1);
+    i++;
   }
   if (body.address_line_2) {
-    updateStatement += `address_line_2 = '${body.address_line_2}',`;
+    updateStatement += `address_line_2 = $${i},`;
+    updateValue.push(body.address_line_2);
+    i++;
   }
   if (body.lat) {
-    updateStatement += `lat = ${body.lat},`;
+    updateStatement += `lat = $${i},`;
+    updateValue.push(body.lat);
+    i++;
   }
   if (body.lon) {
-    updateStatement += `lon = ${body.lon},`;
+    updateStatement += `lon = $${i},`;
+    updateValue.push(body.lon);
+    i++;
   }
   if (body.image_url) {
-    updateStatement += `image_url = '${body.image_url}',`;
+    updateStatement += `image_url = $${i},`;
+    updateValue.push(body.image_url);
   }
 
   updateStatement = updateStatement.slice(0, -1);
@@ -82,7 +105,7 @@ const updatePoint = (pointId, body) => {
   RETURNING *;
   `;
 
-  return db.query(query, [pointId])
+  return db.query(query, updateValue)
     .then(data => {
       return data.rows;
     })
@@ -91,6 +114,7 @@ const updatePoint = (pointId, body) => {
     });
 };
 
+//Delete point from point table
 const deletePoint = (pointId) => {
   const query = `
   DELETE FROM points WHERE points.id = $1;
