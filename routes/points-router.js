@@ -4,6 +4,7 @@ const pointQueries = require('../db/queries/points-queries');
 
 
 //change this to get body from req.body and userId from cookie
+//check if map_id need to be passed from route or inside the object?
 router.post('/new', (req, res) => {
   const pointId = req.params.pointId;
   const body = {

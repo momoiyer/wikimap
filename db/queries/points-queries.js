@@ -16,7 +16,7 @@ const getPointsDetailsByMapId = (mapId) => {
     });
 };
 
-const addPoints = (pointId, body) => {
+const addPoints = (body) => {
 
   let columnName = "title, address_line_1, address_line_2, lat, lon, map_id,";
   let columnValue = `'${body.title}','${body.address_line_1}','${body.address_line_2}',${body.lat},${body.lon},${body.map_id},`;
