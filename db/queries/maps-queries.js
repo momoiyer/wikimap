@@ -162,14 +162,24 @@ const getMyMaps = (userId) => {
 };
 
 const updateMap = (mapId, body) => {
+  let updateStatement = "";
+
+  if (body.title) {
+    updateStatement += `title = '${body.title}',`;
+  }
+  if (body.description) {
+    updateStatement += `description = '${body.description}',`;
+  }
+  updateStatement = updateStatement.slice(0, -1);
+
   const query = `
   UPDATE maps
-  SET title = $1, description = $2
-  WHERE maps.id = $3
+  SET ${updateStatement}
+  WHERE maps.id = $1
   RETURNING *;
   `;
 
-  const param = [body.title, body.description, mapId];
+  const param = [mapId];
 
   return db.query(query, param)
     .then(data => {
