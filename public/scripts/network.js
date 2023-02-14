@@ -57,4 +57,25 @@ function getMapDetails(mapId) {
 
 // FAVORUITES MAP RELATED ROUTES //
 
+function getMyContributedMaps() {
+  return $.ajax({
+    method: "GET",
+    url: "/api/contributions/"
+  });
+}
+
+function getContributors(mapId) {
+  return $.ajax({
+    method: "GET",
+    url: `/api/contributions/${mapId}`
+  });
+}
+
 // CONTRIBUTED MAP RELATED ROUTES //
+
+function getMyFavouriteMaps() {
+  return $.ajax({
+    method: "GET",
+    url: "/api/favourites/"
+  });
+}

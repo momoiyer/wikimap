@@ -23,4 +23,16 @@ $(() => {
     `);
     });
   });
+
+  $("#btngetContributors").click(function() {
+    //pass map id from input
+    getContributors(2).then(function(json) {
+      console.log("json this map's contributor litst:", json);
+      $('#contributors').append(`
+      <div>
+      <h1> This Map's Contributor list is here!</h1>
+      </div>
+    `);
+    });
+  });
 });
