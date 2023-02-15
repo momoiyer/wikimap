@@ -10,7 +10,7 @@ const renderInitialMapDetailPage = function() {
         <section class="contributors-form"></section>
 
         <!--is in section.append-forms on map details page, will more likely need jquery slidedown on click-->
-        <section class="leaflet-map"><div id="map"></div></section>
+        <section class="leaflet-map"></section>
       </div>
 
       <!--map detail card with favourite icon, edit map form and add/edit point form points list in this div-->
@@ -59,6 +59,9 @@ const loadMapDetailPage = function(mapId) {
       $(".manage-contributors").hide(); //may be change this with hidden css
     });
 
+    //append leaflet map
+    const $mapSession = $('.leaflet-map');
+    $mapSession.append('<div id="map"></div>');
     loadMap();
   });
 
