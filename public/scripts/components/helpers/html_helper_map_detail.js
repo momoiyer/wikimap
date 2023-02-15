@@ -47,7 +47,7 @@ const renderCreateMapForm = function() {
       <label for="map-description">description</label>
       <input type="text" name="description" class="form-control" id="map-description" placeholder="">
     </div>
-    <button type="submit" class="btn btn-outline-dark btn-small">save</button>
+    <button type="submit" class="btn btn-outline-dark btn-small" id="btnSaveMap">save</button>
   </form>
   `;
   return $html;
@@ -114,5 +114,44 @@ const renderPointCardCollection = function(points) {
     const $pointCard = renderPointCard(point);
     $html += $pointCard;
   });
+  return $html;
+};
+
+const renderAddPoint = function() {
+  const $html = `
+  <!-- to slide down on click of the article.add-point-card -->
+  <form class="add-point">
+    <div>add point to the map</div>
+    <div class="form-group">
+      <label for="title">point name</label>
+      <input type="text" name="name" class="form-control" id="title"  placeholder="">
+    </div>
+    <div class="form-group">
+      <label for="description">description</label>
+      <input type="text" name="description" class="form-control" id="description" placeholder="">
+    </div>
+    <div class="form-group">
+      <label for="image-url">image url</label>
+      <input type="text" name="image-url" class="form-control" id="image-url">
+    </div>
+    <div class="form-group">
+      <label for="address_line_1">primary address information</label>
+      <input type="text" name="address_line_1" class="form-control" id="address_line_1" >
+    </div >
+    <div class="form-group">
+      <label for="address_line_2">secondary address information</label>
+      <input type="text" name="address_line_2" class="form-control" id="address_line_2">
+      </div>
+            <div class="form-group">
+              <label for="latitude">latitude</label>
+              <input type="text" name="latitude" class="form-control" id="latitude" >
+            </div>
+            <div class="form-group">
+              <label for="longitude">longitude</label>
+              <input type="text" name="longitude" class="form-control" id="longitude" >
+            </div>
+            <button type="submit" class="btn btn-outline-dark btn-small">add</button>
+          </form >
+  `;
   return $html;
 };
