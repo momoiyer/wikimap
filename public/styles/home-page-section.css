@@ -1,0 +1,13 @@
+section.map-cards-here#non-carousel-map {
+  width: 100vw;
+  background-color: whitesmoke;
+  padding: 1.5em;
+
+  display:flex;
+  justify-content: left;
+  align-content: stretch;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 1em;
+}
+

@@ -1,0 +1,130 @@
+#user-city {
+  margin: 0.1em;
+}
+
+#user-country {
+  margin: 0.1em;
+}
+
+header.for-browse-pages {
+  margin-left: 2em;
+  margin-top: 10vh;
+  height:11vh;
+  width: 100vw;
+  color: #ADE576;
+  background-color: whitesmoke;
+
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  padding-left: 1em;
+  padding-right: 2em;
+}
+/* phone and tablet */
+@media only screen and (max-width: 1023px) {
+
+
+
+  header#user-profile {
+    font-size: x-small;
+    margin-top: 10vh;
+
+    padding-top: 1.2em;
+    padding-bottom: 1.7em;
+    padding-left: 1em;
+    padding-right: 2em;
+
+    width: 100vw;
+    height: 11vh;
+    background-color:#336d59;
+    color:white;
+
+    display: flex;
+    text-align: right;
+    align-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  header div#user-pic-name {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  header#user-profile img {
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 5px;
+    margin-right: 1em;
+  }
+
+  header div#user-location {
+    padding-right: 1em;
+
+    font-size:x-small;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+}
+
+/* for desktop and large desktop */
+@media only screen and (min-width: 1024px) {
+
+  header#user-profile {
+    font-size: x-small;
+
+    margin-top: 12vh;
+    padding-top: 1.2em;
+    padding-bottom: 1.7em;
+    padding-left: 1em;
+    padding-right: 2em;
+
+    width: 100vw;
+    height: 11vh;
+    color:white;
+    background-color: #336d59;
+    display: flex;
+    text-align: right;
+    align-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  header div#user-pic-name {
+    margin-left: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  header#user-profile img {
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 5px;
+    margin-right: 1em;
+  }
+
+  header div#user-location {
+    padding-right: 1em;
+
+    font-size:x-small;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+}
+
+header {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+}

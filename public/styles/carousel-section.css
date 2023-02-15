@@ -1,0 +1,76 @@
+/* phone and tablet */
+/* @media only screen and (max-width: 1023px) { */
+
+  section.scrolling-wrapper {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #B4D0C6;
+    background-color: whitesmoke;
+    color:#99708E;
+    height: 60vh;
+    width: 90%;
+
+    margin-bottom: 1.5em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+    margin-top: 1.5em;
+
+
+
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+  div.inner-scroll {
+
+    margin-left: 2.5em;
+    margin-right: 20px;
+    display: inline-flex;
+    overflow-inline: auto;
+    justify-self: center;
+    gap:2em;
+
+  }
+
+
+
+  section.scrolling-wrapper  h5 {
+    margin-left: 1.5em;
+    display: flex;
+    align-self: flex-start;
+    justify-self: flex-start;
+
+
+  }
+
+  
+  .fa-heart {
+    color: #CDDDBB;
+  }
+
+  /* ON CLICK ADD CLASS .is-favourite */
+
+  .fa-heart.is-favourite {
+    color: #99708E;
+  }
+
+  .fa-heart:hover {
+    color: #ADE576;
+  }
+
+ header img.map-point {
+    height: 7em;
+    margin-bottom: 1em;
+
+  }
+
+
+
