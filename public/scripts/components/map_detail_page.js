@@ -20,7 +20,6 @@ const renderInitialMapDetailPage = function() {
           <div class="inside-scroll">
             <article class="add-point-card">
               <i class="fa-solid fa-xl fa-plus"></i>
-              ADD
             </article>
             <!-- points cards will be appended in here -->
           </div>
@@ -102,9 +101,28 @@ $(() => {
   $('body').on('click', '#btnCreateMap', function() {
     const $mapEditForm = renderCreateMapForm();
     mountDetailPage($mapEditForm);
+    $('#right-half').hide();
+    $('#points-list').hide();
   });
 
   $('body').on('click', '#btnManageContributors', function() {
     $(".manage-contributors").slideToggle("slow", function() { });
   });
+
+  $('body').on('click', '.add-point-card', function() {
+    const $addPointForm = renderAddPoint();
+    $(this).empty();
+    $(this).append($addPointForm);
+  });
+
+  $("body").on('submit', ".new-map", (function(event) {
+    // prevent the default form submission behaviour
+    event.preventDefault();
+    // $('.new-map').on('submit', function(event) {
+    event.preventDefault();
+    console.log("here to save map!");
+    const createMapString = $(this).serialize();
+    console.log("createMapString:", createMapString);
+
+  }));
 });
