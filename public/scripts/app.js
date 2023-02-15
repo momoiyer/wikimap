@@ -2,16 +2,6 @@
 // home page loading
 
 $(() => {
-  const $loadHomePage = function() {
-    getAllMapListings().then(function(json) {
-      renderInitialHomePage();
-      views_manager.show('allMapListings');
-      renderMapCardToHomePage(json);
-    });
-  };
-
-  //get all maps listing for home page
-  $loadHomePage();
 
   $("#btnLogin").click(function() {
     //pass user id from the input?
