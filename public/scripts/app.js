@@ -20,5 +20,4 @@ $(() => {
   $("#btnHome").click(function() {
     $loadHomePage();
   });
-
 });

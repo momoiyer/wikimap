@@ -1,6 +1,21 @@
 const renderInitialMapDetailPage = function() {
   const $mapDetailsPage = $(`
     <section id="map-details-page">
+      <!--map detail card with favourite icon, edit map form and add/edit point form points list in this div-->
+      <div id="left-half">
+        <article id="map-card-for-detail-page"></article>
+        <section class="vertical-scroll-container" id="points-list">
+          <div class="inside-scroll">
+
+          <article class="add-point-form">
+          </article>
+            <article class="add-point-card">
+              <i class="fa-solid fa-xl fa-plus"></i>
+            </article>
+            <!-- points cards will be appended in here -->
+          </div>
+        </section>
+      </div>
       <!-- delete map button manage contributors form, interactive map -->
       <div id="right-half">
         <div class="map-options"><span id="btnManageContributors">manage contributors</span>
@@ -11,20 +26,6 @@ const renderInitialMapDetailPage = function() {
 
         <!--is in section.append-forms on map details page, will more likely need jquery slidedown on click-->
         <section class="leaflet-map"></section>
-      </div>
-
-      <!--map detail card with favourite icon, edit map form and add/edit point form points list in this div-->
-      <div id="left-half">
-        <article id="map-card-for-detail-page"></article>
-        <section class="vertical-scroll-container" id="points-list">
-          <div class="inside-scroll">
-            <article class="add-point-card">
-              <i class="fa-solid fa-xl fa-plus"></i>
-              ADD
-            </article>
-            <!-- points cards will be appended in here -->
-          </div>
-        </section>
       </div>
     </section>
   `);
@@ -58,7 +59,13 @@ const loadMapDetailPage = function(mapId) {
 
       $(".manage-contributors").hide(); //may be change this with hidden css
     });
+
+    //append leaflet map
+    const $mapSession = $('.leaflet-map');
+    $mapSession.append('<div id="map"></div>');
+    loadMap();
   });
+
 };
 
 const mountDetailPage = function($mapCard) {
@@ -77,6 +84,7 @@ const mountDetailPage = function($mapCard) {
 $(() => {
 
   renderInitialMapDetailPage();
+  $('.add-point-form').hide();
 
   $('body').on('click', '#btngetMapToEdit', function() {
     //get mapId from hidden field
@@ -96,9 +104,31 @@ $(() => {
   $('body').on('click', '#btnCreateMap', function() {
     const $mapEditForm = renderCreateMapForm();
     mountDetailPage($mapEditForm);
+    $('#right-half').hide();
+    $('#points-list').hide();
   });
 
   $('body').on('click', '#btnManageContributors', function() {
     $(".manage-contributors").slideToggle("slow", function() { });
   });
+
+  $('body').on('click', '.add-point-card', function() {
+    const $addPointForm = renderAddPoint();
+    // $(this).empty();
+    const $addPointFormArticle = $('.add-point-form');
+    $addPointFormArticle.append($addPointForm);
+    $('.add-point-card').hide();
+    $('.add-point-form').slideDown();
+  });
+
+  $("body").on('submit', ".new-map", (function(event) {
+    // prevent the default form submission behaviour
+    event.preventDefault();
+    // $('.new-map').on('submit', function(event) {
+    event.preventDefault();
+    console.log("here to save map!");
+    const createMapString = $(this).serialize();
+    console.log("createMapString:", createMapString);
+
+  }));
 });
