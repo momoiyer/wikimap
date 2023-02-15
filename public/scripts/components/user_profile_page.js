@@ -68,11 +68,11 @@ $(() => {
       const $userData = json.results[0];
       $renderHeader($userData);
       const $myMapData = json.results[1];
-      renderMapCardCollection($myMapData, '#my-maps');
+      renderMapCardCollection($myMapData, '#my-maps-carousel');
       const $myFavouriteMapsData = json.results[2];
-      renderMapCardCollection($myFavouriteMapsData, '#my-favourites');
+      renderMapCardCollection($myFavouriteMapsData, '#favourites-carousel');
       const $myContributedMapsData = json.results[3];
-      renderMapCardCollection($myContributedMapsData, '#my-contributions');
+      renderMapCardCollection($myContributedMapsData, '#contributed-maps-carousel');
     });
   });
 });

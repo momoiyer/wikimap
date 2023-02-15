@@ -5,19 +5,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treasure Map - Home Page</title>
+    <title>Treasure Map</title>
 
     <!-- External CSS -->
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
       type="text/css" />
 
-    <!-- Custom Fonts -->
+      <!-- Bootstrap -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <!-- Logos -->
+
+      <!-- Custom Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600&display=swap" rel="stylesheet">
+
+
+      <!-- Logos -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- App CSS -->
     <link rel="stylesheet" href="../styles/leaflet-style.css"/>
+    <link rel="stylesheet" href="../styles/carousel-section.css"/>
+    <link rel="stylesheet" href="../styles/header.css"/>
+    <link rel="stylesheet" href="../styles/home-page-section.css"/>
+    <link rel="stylesheet" href="../styles/nav.css"/>
+    <link rel="stylesheet" href="../styles/layout.css"/>
+    <link rel="stylesheet" href="../styles/map-cards.css"/>
+    <link rel="stylesheet" href="../styles/map-details-page.css"/>
+
+
 
     <!-- External JS -->
     <script
@@ -57,14 +75,31 @@
     <script type="text/javascript" src="./scripts/api/reverse_geocoding.js"></script> -->
   </head>
   <body>
+    <nav class="mobile-top-nav">
+      <span id="btnHome" class="desktop-nav"><i class="fa-solid fa-2xl fa-bounce fa-map-location-dot"></i>&nbsp;&nbsp;Treasure Maps</span>
+        <!-- <span class="desktop-nav">Treasure Map</span> -->
+
+      <span id="btngetUserProfile" class="desktop-nav hamburger iconic"><i class="fa-solid fa-user"></i>profile</span>
+      <span id="btngetMyMaps" class="desktop-nav hamburger iconic"><i class="fa-solid fa-map"></i>my maps</span>
+      <span id="btngetMyFavouriteMaps" class="desktop-nav hamburger iconic"><i class="fa-solid fa-hand-holding-heart"></i></i>favourites</span>
+      <span id="btngetMyContributedMaps" class="desktop-nav hamburger iconic"><i class="fa-solid fa-users-rectangle"></i>shared maps</span>
+      <span id="btnCreateMap" class="desktop-nav hamburger iconic"><i class="fa-solid fa-square-plus"></i></i>create map</span>
+      <!-- <span class="desktop-nav"><i class="fa-solid fa-bars"></i></span> -->
+      <span id="btnLogin" class="desktop-nav"><button type="button" class="desktop-nav btn btn-outline-light">login</button></span>
+      <span id="btnLogout" class="desktop-nav"><button type="button" class="desktop-nav btn btn-outline-light">logout</button></span>
+    </nav>
+
     <main id="main-content">
-      <button type="button" id="btnHome">Logo</button>
+<!-- commented this out since we have the actual nav bar now but I added the id's you set to everything -->
+<!-- so the navigation should be unchanged -->
+
+      <!-- <button type="button" id="btnHome">Logo</button>
       <button type="button" id="btngetUserProfile">USER PROFILE</button>
       <button type="button" id="btnCreateMap">CREAT NEW MAP</button>
       <button type="button" id="btngetMyMaps">MY MAPS</button>
       <button type="button" id="btngetMyFavouriteMaps">MY FAVOURITES</button>
       <button type="button" id="btngetMyContributedMaps">SHARED MAPS</button>
       <button type="button" id="btnLogin">LogIn</button>
-      <button type="button" id="btnLogout">Logout</button>
+      <button type="button" id="btnLogout">Logout</button> -->
     </body>
   </html>
