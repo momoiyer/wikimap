@@ -4,8 +4,9 @@
 $(() => {
   const $loadHomePage = function() {
     getAllMapListings().then(function(json) {
-      console.log("json maps:", json);
+      renderInitialHomePage();
       views_manager.show('allMapListings');
+      renderMapCardToHomePage(json);
     });
   };
 
