@@ -1,18 +1,6 @@
 const renderInitialMapDetailPage = function() {
   const $mapDetailsPage = $(`
     <section id="map-details-page">
-      <!-- delete map button manage contributors form, interactive map -->
-      <div id="right-half">
-        <div class="map-options"><span id="btnManageContributors">manage contributors</span>
-          <span id="btngetMapToEdit">edit map&nbsp;<i  class="edit fa-regular  fa-pen-to-square"></i></span>
-          <span id="delete-map">delete map&nbsp;<i  class="delete fa-solid  fa-trash-can"></i></span>
-        </div>
-        <section class="contributors-form"></section>
-
-        <!--is in section.append-forms on map details page, will more likely need jquery slidedown on click-->
-        <section class="leaflet-map"></section>
-      </div>
-
       <!--map detail card with favourite icon, edit map form and add/edit point form points list in this div-->
       <div id="left-half">
         <article id="map-card-for-detail-page"></article>
@@ -24,6 +12,17 @@ const renderInitialMapDetailPage = function() {
             <!-- points cards will be appended in here -->
           </div>
         </section>
+      </div>
+      <!-- delete map button manage contributors form, interactive map -->
+      <div id="right-half">
+        <div class="map-options"><span id="btnManageContributors">manage contributors</span>
+          <span id="btngetMapToEdit">edit map&nbsp;<i  class="edit fa-regular  fa-pen-to-square"></i></span>
+          <span id="delete-map">delete map&nbsp;<i  class="delete fa-solid  fa-trash-can"></i></span>
+        </div>
+        <section class="contributors-form"></section>
+
+        <!--is in section.append-forms on map details page, will more likely need jquery slidedown on click-->
+        <section class="leaflet-map"></section>
       </div>
     </section>
   `);
