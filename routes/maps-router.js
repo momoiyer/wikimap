@@ -51,7 +51,7 @@ router.get('/:mapid/edit', (req, res) => {
 
 router.get('/:mapid', (req, res) => {
   const mapId = req.params.mapid;
-  const userId = req.params.userId;
+  const userId = req.session.userid;
   const mapPromise = userId ? mapQueries.getMapDetailsByMapIdNUserId(mapId, userId) : mapQueries.getMapDetailsByMapId(mapId);
   const pointPromise = pointQueries.getPointsDetailsByMapId(mapId);
   Promise.all([mapPromise, pointPromise])

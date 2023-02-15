@@ -9,6 +9,8 @@ $(() => {
 
         <section id="contributors"></section>
         <button type="button" id="btngetContributors">Get this Map's contirbutors</button>
+
+      <div id="map"></div>
       </div>
   `);
 
