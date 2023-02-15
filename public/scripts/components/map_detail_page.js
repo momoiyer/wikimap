@@ -58,7 +58,13 @@ const loadMapDetailPage = function(mapId) {
 
       $(".manage-contributors").hide(); //may be change this with hidden css
     });
+
+    //append leaflet map
+    const $mapSession = $('.leaflet-map');
+    $mapSession.append('<div id="map"></div>');
+    loadMap();
   });
+
 };
 
 const mountDetailPage = function($mapCard) {

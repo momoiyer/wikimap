@@ -35,8 +35,6 @@
     <link rel="stylesheet" href="../styles/map-cards.css"/>
     <link rel="stylesheet" href="../styles/map-details-page.css"/>
 
-
-
     <!-- External JS -->
     <script
       src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -49,6 +47,11 @@
       integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
       crossorigin=""></script>
 
+
+    <!-- API JS -->
+    <script type="text/javascript" src="./scripts/api/leaflet.js"></script>
+    <script type="text/javascript" src="./scripts/api/reverse_geocoding.js"></script>
+
     <!--Internal JS-->
     <script type="text/javascript" src="./scripts/network.js"></script>
     <script type="text/javascript" src="./scripts/views_manager.js"></script>
@@ -57,8 +60,8 @@
 
     <script type="text/javascript"
       src="./scripts/components/helpers/html_helper_map.js"></script>
-    <script type="text/javascript"
-      src="./scripts/components/helpers/html_helper_map_detail.js"></script>
+      <script type="text/javascript"
+        src="./scripts/components/helpers/html_helper_map_detail.js"></script>
     <script type="text/javascript"
       src="./scripts/components/all_map_home_page.js"></script>
     <script type="text/javascript"
@@ -71,8 +74,6 @@
       src="./scripts/components/contributed_listing_page.js"></script>
     <script type="text/javascript"
       src="./scripts/components/favourites_listing_page.js"></script>
-    <!-- <script type="text/javascript" src="./scripts/api/leaflet.js"></script>
-    <script type="text/javascript" src="./scripts/api/reverse_geocoding.js"></script> -->
   </head>
   <body>
     <nav class="mobile-top-nav">
@@ -89,17 +90,6 @@
       <span id="btnLogout" class="desktop-nav"><button type="button" class="desktop-nav btn btn-outline-light">logout</button></span>
     </nav>
 
-    <main id="main-content">
-<!-- commented this out since we have the actual nav bar now but I added the id's you set to everything -->
-<!-- so the navigation should be unchanged -->
-
-      <!-- <button type="button" id="btnHome">Logo</button>
-      <button type="button" id="btngetUserProfile">USER PROFILE</button>
-      <button type="button" id="btnCreateMap">CREAT NEW MAP</button>
-      <button type="button" id="btngetMyMaps">MY MAPS</button>
-      <button type="button" id="btngetMyFavouriteMaps">MY FAVOURITES</button>
-      <button type="button" id="btngetMyContributedMaps">SHARED MAPS</button>
-      <button type="button" id="btnLogin">LogIn</button>
-      <button type="button" id="btnLogout">Logout</button> -->
+    <main id="main-content"></main>
     </body>
   </html>
