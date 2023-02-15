@@ -6,6 +6,9 @@ const renderInitialMapDetailPage = function() {
         <article id="map-card-for-detail-page"></article>
         <section class="vertical-scroll-container" id="points-list">
           <div class="inside-scroll">
+
+          <article class="add-point-form">
+          </article>
             <article class="add-point-card">
               <i class="fa-solid fa-xl fa-plus"></i>
             </article>
@@ -81,6 +84,7 @@ const mountDetailPage = function($mapCard) {
 $(() => {
 
   renderInitialMapDetailPage();
+  $('.add-point-form').hide();
 
   $('body').on('click', '#btngetMapToEdit', function() {
     //get mapId from hidden field
@@ -110,8 +114,11 @@ $(() => {
 
   $('body').on('click', '.add-point-card', function() {
     const $addPointForm = renderAddPoint();
-    $(this).empty();
-    $(this).append($addPointForm);
+    // $(this).empty();
+    const $addPointFormArticle = $('.add-point-form');
+    $addPointFormArticle.append($addPointForm);
+    $('.add-point-card').hide();
+    $('.add-point-form').slideDown();
   });
 
   $("body").on('submit', ".new-map", (function(event) {
