@@ -74,6 +74,8 @@ const getMapDetailsForContributedMapsByUserId = (userId) => {
 
 //for the manage contributors section on map details page
 const removeContributorsFromMapByUserId = (userId, mapId) => {
+  console.log("userId: ", userId);
+  console.log("mapId: ", mapId);
   return db.query(`DELETE FROM contributors
   WHERE user_id = $1 AND map_id =$2
   RETURNING*;`, [userId, mapId])
@@ -101,15 +103,8 @@ const addContributorsToMapByUserId = (userId, mapId) => {
 };
 
 
-
-const getUserIdByName = (userId) => {
-
-};
-
-
-
 const getContributorsByMapId = (mapId) => {
-  return db.query(`SELECT users.name
+  return db.query(`SELECT contributors.user_id,users.name
   FROM contributors
   LEFT JOIN users ON users.id = contributors.user_id
   WHERE map_id = $1;`, [mapId])

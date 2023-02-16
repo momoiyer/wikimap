@@ -61,24 +61,30 @@ const renderManageContributorForm = function(contributors) {
   const contributorListView = renderContributorsListView(contributors);
   const $html = `
   <!--is in section.append-forms on map details page, will more likely need jquery slidedown on click-->
-  <form class="manage-contributors">
+  <article class ="manage-contributors">
     <div>current contributors</div>
     <ul class="view-contributors" style="list-style-type:none;">
       ${contributorListView}
     </ul >
-    <div class="form-group">
-      <label for="name-of-contributor">name</label>
-      <input type="text" name="name" class="form-control" id="name-of-contributor" placeholder="">
-    </div>
-    <button type="submit" class="btn btn-outline-dark btn-small">add</button>
-  </form >
+    <form class="add-contributors">
+      <div class="form-group">
+        <input type="text" name="name" class="form-control" id="name-of-contributor" placeholder="Enter New Contributor Name">
+      </div>
+      <button type="submit" class="btn btn-outline-dark btn-small" id="add-contributor">add</button>
+    </form >
+  </article>
   `;
   return $html;
 };
 
 const renderContributorsListView = function(contributors) {
   let $html = '';
-  contributors.forEach(contributor => $html += ` <li><i  class="delete fa-solid fa-trash-can">&nbsp;&nbsp;</i>${contributor.name}</li> `);
+  contributors.forEach(contributor => $html += `
+  <li>
+  <i  class="delete fa-solid fa-trash-can" id="delete-contributor">&nbsp;&nbsp;</i>
+  <input type="hidden" id="contributorId" name="contributorId" value="${contributor.user_id}">
+  ${contributor.name}
+  </li> `);
   return $html;
 };
 

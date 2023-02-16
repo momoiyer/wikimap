@@ -2,7 +2,6 @@ const db = require('../connection');
 
 //get point detail data by mapId for map detail page of any type of user
 const getPointsDetailsByMapId = (mapId) => {
-  console.log("here to get point by map id:", mapId);
   const query = `
     SELECT points.*
     FROM points
@@ -10,7 +9,6 @@ const getPointsDetailsByMapId = (mapId) => {
   `;
   return db.query(query, [mapId])
     .then(data => {
-      console.log("data:", data.rows);
       return data.rows;
     })
     .catch(err => {

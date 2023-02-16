@@ -49,13 +49,8 @@ const loadMapDetailPage = function(mapId) {
 
     //append contributor section and hide
     const mapId = $('#mapId').val();
-    getContributors(mapId).then(function(json) {
-      const $contributorsForm = renderManageContributorForm(json.listOfContributors);
-      const $contributorsFormSection = $('.contributors-form');
-      $contributorsFormSection.append($contributorsForm);
+    appendContributorSection(mapId, true);
 
-      $(".manage-contributors").hide(); //may be change this with hidden css
-    });
     //append leaflet map
     const $mapSession = $('.leaflet-map');
     $mapSession.append('<div id="map"></div>');
@@ -83,6 +78,18 @@ const appendPointSection = function(points) {
   const $pointsCollection = renderPointCardCollection(points);
   const $addPointCardArticle = $('.add-point-card');
   $addPointCardArticle.after($pointsCollection);
+};
+
+const appendContributorSection = function(mapId, onLoad = false) {
+  getContributors(mapId).then(function(json) {
+    const $contributorsForm = renderManageContributorForm(json.listOfContributors);
+    const $contributorsFormSection = $('.contributors-form');
+    $contributorsFormSection.append($contributorsForm);
+    if (onLoad) {
+      //hide contributor section on load
+      $(".manage-contributors").hide();
+    }
+  });
 };
 
 $(() => {
@@ -208,7 +215,33 @@ $(() => {
     const parent = this.parentNode;
     const pointId = $(parent).find("#pointId").val();
     console.log("here to edit point: ", pointId);
-
   });
 
+  $('body').on('click', '#delete-contributor', function() {
+    const mapId = $('#mapId').val();
+    const parent = this.parentNode;
+    const contributorId = $(parent).find("#contributorId").val();
+
+    const messgage = "Are you sure you want to delete current contributor?";
+    if (confirm(messgage) == true) {
+      removeContributorFromMap(mapId, contributorId).then(function(json) {
+        appendContributorSection(mapId);
+      });
+    }
+  });
+
+  $("body").on('submit', ".add-contributors", (function(event) {
+    // prevent the default form submission behaviour
+    event.preventDefault();
+
+    const mapId = $('#mapId').val();
+    const contributorString = $(this).serialize().replaceAll("%20", " ");
+    const splitedTextArray = contributorString.split('&');
+    const userName = splitedTextArray[0].slice(5);
+    const input = { mapId, userName };
+    addContributorToMap(input).then(function(json) {
+      console.log("json: ", json);
+      appendContributorSection(mapId);
+    });
+  }));
 });

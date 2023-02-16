@@ -10,11 +10,11 @@ const mapQueries = require(`../db/queries/maps-queries`);
 
 router.get(`/login/:userid`, (req, res) => {
 
-  console.log('req.params.userid:', req.params.userid)
+  console.log('req.params.userid:', req.params.userid);
 
   //sets cookie to user id value
   //and we can use the cookie to look up info from database
-  req.session.userid = req.params.userid
+  req.session.userid = req.params.userid;
   res.json(req.session.userid);
 });
 
@@ -26,7 +26,7 @@ router.get(`/`, (req, res) => {
   //returns details for all map categories based on user
   const contributorPromise = contributorsQueries.getMapDetailsForContributedMapsByUserId(userId);
   const favePromise = favouritesQueries.getMapDetailsForFavouriteMapsByUserId(userId);
-  const myMapsPromise = userQueries.getMyMapDetailsByUserId(userId)
+  const myMapsPromise = userQueries.getMyMapDetailsByUserId(userId);
   Promise.all([userPromise, contributorPromise, favePromise, myMapsPromise])
     .then(results => {
       res.json({ results });
@@ -45,9 +45,8 @@ router.get(`/`, (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.session = null;
-  res.send('logged out')
+  res.send('logged out');
 });
-
 
 
 module.exports = router;

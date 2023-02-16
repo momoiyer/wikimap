@@ -124,17 +124,18 @@ function getContributors(mapId) {
   });
 }
 
-function addContributorToMap(mapId) {
+function addContributorToMap(data) {
   return $.ajax({
     method: "POST",
-    url: `/api/contributions/${mapId}`
+    url: `/api/contributions/`,
+    data
   });
 }
 
-function removeContributorFromMap(mapId) {
+function removeContributorFromMap(mapId, userId) {
   return $.ajax({
     method: "DELETE",
-    url: `/api/contributions/${mapId}`
+    url: `/api/contributions/${mapId}/${userId}`
   });
 }
 
