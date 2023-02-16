@@ -1,12 +1,12 @@
 /* phone and tablet */
-@media only screen and (max-width: 1023px) {
+
   nav {
     height: 10vh;
     width: 100vw;
     padding-left: 2em;
     padding-right: 2em;
     background-color:#B4D0C6;
-    font-size: smaller;
+    font-size: small;
     text-align: center;
     display: flex;
       flex-direction: row;
@@ -25,6 +25,14 @@
       align-items: center;
   }
 
+  #drop-down {
+    width:75vw;
+    margin-left: 1em;
+    visibility: visible;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
   /* nav.mobile-bottom-nav {
 
 
@@ -40,8 +48,11 @@
       align-items: center;
 
   } */
+  /* i.fa-bars {
+    visibility:collapse;
+  } */
 
-}
+
 
 
 span.iconic {
@@ -50,16 +61,69 @@ span.iconic {
   align-items: center;
 }
 
-i.fa-bars {
-  display: none;
-}
 
-@media only screen and (max-width: 850px) {
-  nav.mobile-top-nav:not(:first-child) {display: none;}
+@media only screen and (max-width: 1200px) {
+  nav {
+    height: 10vh;
+    width: 105vw;
+    padding-left: 2em;
+    padding-right: 2em;
+    background-color:#B4D0C6;
+    font-size: small;
+    text-align: center;
+    display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+  }
 
-  /* nav.mobile-top-nav {
 
-  } */
+  nav.mobile-top-nav {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  button.btn-outline-light {
+    margin-right: 0.5em;
+  }
+
+    i.fa-bars {
+      visibility: visible;
+      position: fixed;
+      right:2em;
+      top:2em;
+    }
+
+  #drop-down {
+    display:none;
+    width:10em;
+    border-radius: 15px;
+    position: fixed;
+    right:1em;
+
+    background-color: #B4D0C6;
+    margin-top: 20vh;
+    padding-right:1em;
+    padding-top: 25vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-self: right;
+    align-items: flex-end;
+
+  }
+
+  span.hamburger {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 0.3em;
+    margin-bottom: 0.3em;
+  }
 
 
 }
@@ -70,7 +134,7 @@ span.desktop-nav:hover {
 }
 
 
-/* for desktop and large desktop */
+/* for desktop and large desktop
 @media only screen and (min-width: 1024px) {
   nav.mobile-top-nav {
 
@@ -78,7 +142,7 @@ span.desktop-nav:hover {
     width: 100vw;
     padding-left: 2em;
     padding-right: 2em;
-    font-size: small;
+    font-size: medium;
     background-color:#B4D0C6;
     display: flex;
       flex-direction: row;
@@ -94,4 +158,4 @@ span.desktop-nav:hover {
     display: flex;
     justify-self: end;
   }
-}
+} */

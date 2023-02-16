@@ -20,4 +20,8 @@ $(() => {
   $("#btnHome").click(function() {
     $loadHomePage();
   });
+
+  $("#menu").click(function() {
+    $("#drop-down").slideToggle();
+  })
 });
