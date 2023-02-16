@@ -36,8 +36,7 @@ const loadMapDetailPage = function(mapId) {
   //retrieve map detail data from database
   getMapDetails(mapId).then(function(json) {
     //prepare for map data section
-    console.log("json Map Details Load: ", json);
-    const mapData = json.results[0][0];
+    const mapData = json.results[0];
     const $mapCard = renderMapCardForDetailPage(mapData);
 
     //reset and mount the page

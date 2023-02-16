@@ -37,24 +37,6 @@ router.get('/:mapid', (req, res) => {
     });
 });
 
-
-
-// //find user by user name for manage contributions section
-// router.get('/find/:username', (req, res) => {
-//   const username = req.params.username;
-//   console.log("userName : ", username);
-
-//   userQueries.getUserByName(username)
-//     .then(users => {
-//       res.json({ users });
-//     })
-//     .catch(err => {
-//       res
-//         .status(500)
-//         .json({ error: err.message });
-//     });
-// });
-
 //may need to first get userId by name, instead of by cookie based on form data
 //built query function for userid by name
 
@@ -67,9 +49,7 @@ router.post('/', (req, res) => {
 
   userQueries.getUserByName(userName)
     .then(users => {
-      console.log("users: ", users);
       const userId = users.id;
-      console.log("userId: ", userId);
       return contributorsQueries.addContributorsToMapByUserId(userId, mapId);
     })
     .then(addedRow => {
@@ -80,12 +60,6 @@ router.post('/', (req, res) => {
         .status(500)
         .json({ error: err.message });
     });
-
-  // const userId = req.session.userid;
-  // const mapId = req.params.mapid;
-
-
-
 });
 
 router.delete('/:mapid/:userid', (req, res) => {

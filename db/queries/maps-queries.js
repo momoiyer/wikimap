@@ -92,7 +92,7 @@ const getMapDetailsByMapId = (mapId) => {
   `;
   return db.query(query, [mapId])
     .then(data => {
-      return data.rows;
+      return data.rows[0];
     })
     .catch(err => {
       return err;
@@ -118,7 +118,7 @@ const getMapDetailsByMapIdNUserId = (mapId, userId) => {
   `;
   return db.query(query, [mapId, userId])
     .then(data => {
-      return data.rows;
+      return data.rows[0];
     })
     .catch(err => {
       return err;
