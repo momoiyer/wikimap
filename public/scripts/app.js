@@ -26,4 +26,7 @@ $(() => {
     $(this).addClass('fa-bounce');
   }, function() { $(this).removeClass('fa-bounce'); });
 
+  $("#menu").click(function() {
+    $("#drop-down").slideToggle();
+  })
 });

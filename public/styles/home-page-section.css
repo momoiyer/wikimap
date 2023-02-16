@@ -13,12 +13,13 @@ section.map-cards-here#non-carousel-map {
 }
 
 header.for-browse-pages {
-  margin-left: 2em;
-  margin-top: 10vh;
+  margin-left: 2.5em;
+  margin-top: 12vh;
   height:11vh;
   width: 100vw;
-  color: #ADE576;
+  color: #2F4B41;
   background-color: whitesmoke;
+  font-size: x-large;
 
   padding-top: 1.5em;
   padding-bottom: 1.5em;

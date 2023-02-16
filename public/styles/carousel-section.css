@@ -36,12 +36,13 @@
 
 
   div.inner-scroll {
-
+    padding-left: 10em;
     margin-left: 2.5em;
     margin-right: 20px;
     display: inline-flex;
     overflow-inline: auto;
     justify-self: center;
+    justify-content: right;
     gap:2em;
 
   }
@@ -49,6 +50,7 @@
 
 
   section.scrolling-wrapper  h5 {
+
     margin-left: 1.5em;
     display: flex;
     align-self: flex-start;

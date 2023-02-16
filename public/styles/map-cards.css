@@ -12,8 +12,8 @@ article.map-info-container {
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  overflow: scroll;
-  overflow-x: hidden;
+  /* overflow: scroll;
+  overflow-x: hidden; */
 
 }
 
@@ -60,7 +60,7 @@ article.map-info-container small {
 }
 
 .fa-heart {
-  color: #CDDDBB;
+  color: whitesmoke;
   margin-left: 0.2em;
 
 }
