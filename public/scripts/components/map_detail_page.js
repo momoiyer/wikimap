@@ -18,8 +18,7 @@ const renderInitialMapDetailPage = function() {
       </div>
       <!-- delete map button manage contributors form, interactive map -->
       <div id="right-half">
-        <div class="map-options"><span id="btnManageContributors">manage contributors&nbsp;<i class="fa-solid fa-chevron-down"></i></span>
-          
+      <div class="map-options"><span id="btnManageContributors">manage contributors&nbsp;<i class="fa-solid fa-chevron-down"></i></span>
           <span id="delete-map">delete map&nbsp;<i  class="delete fa-solid  fa-trash-can"></i></span>
         </div>
         <section class="contributors-form"></section>
@@ -100,12 +99,6 @@ $(() => {
     });
   });
 
-  $('body').on('click', '#btnCreateMap', function() {
-    const $mapEditForm = renderCreateMapForm();
-    mountDetailPage($mapEditForm);
-    $('#right-half').hide();
-    $('#points-list').hide();
-  });
 
   $('body').on('click', '#btnManageContributors', function() {
     $(".manage-contributors").slideToggle("slow", function() { });
@@ -120,14 +113,57 @@ $(() => {
     $('.add-point-form').slideDown();
   });
 
+
+  $('body').on('click', '#btnCreateMap', function() {
+    const $mapEditForm = renderCreateMapForm();
+    mountDetailPage($mapEditForm);
+    $('#right-half').hide();
+    $('#points-list').hide();
+  });
+
   $("body").on('submit', ".new-map", (function(event) {
     // prevent the default form submission behaviour
     event.preventDefault();
     // $('.new-map').on('submit', function(event) {
     event.preventDefault();
-    console.log("here to save map!");
-    const createMapString = $(this).serialize();
-    console.log("createMapString:", createMapString);
 
+    const createMapString = $(this).serialize().replaceAll("%20", " ");
+    const splitedTextArray = createMapString.split('&');
+    const title = splitedTextArray[0].slice(6);
+    const description = splitedTextArray[1].slice(12);
+    const input = {
+      title,
+      description
+    };
+    console.log("input>>", input);
+    addNewMap(input).then(function(json) {
+      console.log("json: ", json);
+      const mapId = json.map[0].id;
+      loadMapDetailPage(mapId);
+    });
   }));
+
+  $('body').on('click', '#delete-map', function() {
+    const mapId = $('#mapId').val();
+    const messgage = "Are you sure you want to delete current map?";
+    if (confirm(messgage) == true) {
+      deleteMap(mapId).then(function(json) {
+        console.log("json result: ", json);
+        $loadHomePage();
+      });
+    }
+  });
+
+  $('body').on('click', '#delete-point', function() {
+    const pointId = $('#pointId').val();
+    const messgage = "Are you sure you want to delete current point?";
+    if (confirm(messgage) == true) {
+      console.log("pointId result: ", pointId);
+      // deleteMap(pointId).then(function(json) {
+      //   console.log("json result: ", json);
+      //   $loadHomePage();
+      // });
+    }
+  });
+
 });
