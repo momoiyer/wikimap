@@ -7,7 +7,7 @@ const renderInitialUserProfilePage = function() {
 
     <section class="scrolling-wrapper" id="my-maps">
     <h5>my maps</h5>
-    <button type="button" id="btngetMyMaps">View All</button>
+    <button type="button" class="btn btn-outline-dark" id="btngetMyMaps">View All</button>
     <div class="inner-scroll" id="my-maps-carousel">
       <!-- append map cards for my maps here -->
 
@@ -17,7 +17,7 @@ const renderInitialUserProfilePage = function() {
 
   <section class="scrolling-wrapper" id="my-favourites">
     <h5>my favourites</h5>
-    <button type="button" id="btngetMyFavouriteMaps">View All</button>
+    <button type="button" class="btn btn-outline-dark" id="btngetMyFavouriteMaps">View All</button>
     <div class="inner-scroll" id="favourites-carousel">
       <!-- append map cards for favourite maps here -->
 
@@ -26,7 +26,7 @@ const renderInitialUserProfilePage = function() {
 
   <section class="scrolling-wrapper" id="my-contributions">
     <h5>my shared maps</h5>
-    <button type="button" id="btngetMyContributedMaps">View All</button>
+    <button type="button" class="btn btn-outline-dark" id="btngetMyContributedMaps">View All</button>
     <div class="inner-scroll" id="contributed-maps-carousel">
       <!-- append map cards for contributed maps here -->
 

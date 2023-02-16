@@ -28,6 +28,12 @@
     align-items: center;
   }
 
+  section.scrolling-wrapper button.btn-outline-dark {
+    display:flex;
+    align-self: flex-start;
+    margin-left:2em;
+  }
+
 
   div.inner-scroll {
 
@@ -51,7 +57,7 @@
 
   }
 
-  
+
   .fa-heart {
     color: #CDDDBB;
   }

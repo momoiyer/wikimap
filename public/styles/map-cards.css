@@ -12,7 +12,19 @@ article.map-info-container {
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
+  overflow: scroll;
+  overflow-x: hidden;
 
+}
+
+article.map-info-container:hover {
+  box-shadow: 3px 3px 2px #2F4B41;
+}
+
+img.map-point {
+  border-radius: 10px;
+  max-width: 145px;
+  max-height: 135px;
 }
 
 
@@ -49,6 +61,8 @@ article.map-info-container small {
 
 .fa-heart {
   color: #CDDDBB;
+  margin-left: 0.2em;
+
 }
 
 /* ON CLICK ADD CLASS .is-favourite */

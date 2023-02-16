@@ -13,6 +13,7 @@ body {
 
 }
 
+
 i.fa-thin {
   color: #81667A;
 }
@@ -28,8 +29,8 @@ i.fa-thin:hover {
 main {
   background-color: whitesmoke;
   width: 100vw;
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
   font-weight: 600;
@@ -58,4 +59,12 @@ nav {
   background: #B4D0C6;
   border-radius: 15px;
   box-shadow: inset 0 0 5px grey;
+}
+
+h6 {
+  font-weight: 600;
+}
+
+p {
+  font-weight: 300;
 }

@@ -3,7 +3,7 @@ const renderMapCardForDetailPage = function(map) {
   <header>
     <div>
       <input type="hidden" id="mapId" name="mapId" value="${map.id}">
-      <p id="title-heart">${map.title}<i class="fa-solid fa-heart"></i></p>
+      <p id="title-heart">${map.title}<i class="fa-solid fa-heart"></i> <span id="btngetMapToEdit">edit map&nbsp;<i  class="edit fa-regular  fa-pen-to-square"></i></span></p>
       <p>${map.description}</p>
       <p><small>created on:${map.created_date}</small></p>
     </div>

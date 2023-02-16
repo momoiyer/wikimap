@@ -10,8 +10,8 @@ section#map-details-page {
   justify-content: space-evenly;
 }
 
-div.edit-delete-points {
-  margin-top: 0.6em;
+div.edit-delete-point {
+  margin-top: 1em;
   margin-left: 0.3em;
 
 
@@ -69,6 +69,7 @@ div.inside-scroll {
   height: 100px;
   width: 100px;
   margin-right: 1em;
+  border-radius: 10px;
 }
 
 p#title-heart {
@@ -79,7 +80,7 @@ p#title-heart {
 
 
 article#map-card-for-detail-page {
-  height: 175px;
+  height: auto;
   width: auto;
 
   padding: 1em;
@@ -102,6 +103,13 @@ article.add-point-card {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-wrap: break-word;
+}
+
+article.point-card p {
+  display: flex;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 article.add-point-card:hover {
@@ -128,6 +136,8 @@ article.point-card {
   display: flex;
   flex-direction: row;
   align-items: center;
+
+
 
 
 }
@@ -158,24 +168,28 @@ div#right-half {
   border-width: 2px;
 }
 
-span#edit-map:hover {
+
+
+span#btngetMapToEdit:hover {
   color: #336d59;
+  font-weight: 600;
 }
 
 span#delete-map:hover {
   color: red;
 }
 
-span#manage:hover {
+span#btnManageContributors:hover {
   color: #336d59;
 }
 
 
 div.map-options {
-
-  padding-right: 0.5em;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding: 1em;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 
 
 }

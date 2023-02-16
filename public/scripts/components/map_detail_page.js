@@ -18,8 +18,8 @@ const renderInitialMapDetailPage = function() {
       </div>
       <!-- delete map button manage contributors form, interactive map -->
       <div id="right-half">
-        <div class="map-options"><span id="btnManageContributors">manage contributors</span>
-          <span id="btngetMapToEdit">edit map&nbsp;<i  class="edit fa-regular  fa-pen-to-square"></i></span>
+        <div class="map-options"><span id="btnManageContributors">manage contributors&nbsp;<i class="fa-solid fa-chevron-down"></i></span>
+          
           <span id="delete-map">delete map&nbsp;<i  class="delete fa-solid  fa-trash-can"></i></span>
         </div>
         <section class="contributors-form"></section>
@@ -53,13 +53,12 @@ const loadMapDetailPage = function(mapId) {
     //append contributor section and hide
     const mapId = $('#mapId').val();
     getContributors(mapId).then(function(json) {
-      const $contributorForm = renderManageContributorForm(json.listOfContributors);
-      const $mapCardForDetailPage = $('#map-card-for-detail-page');
-      $mapCardForDetailPage.append($contributorForm);
+      const $contributorsForm = renderManageContributorForm(json.listOfContributors);
+      const $contributorsFormSection = $('.contributors-form');
+      $contributorsFormSection.append($contributorsForm);
 
       $(".manage-contributors").hide(); //may be change this with hidden css
     });
-
     //append leaflet map
     const $mapSession = $('.leaflet-map');
     $mapSession.append('<div id="map"></div>');

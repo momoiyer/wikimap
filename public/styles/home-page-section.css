@@ -1,13 +1,28 @@
 section.map-cards-here#non-carousel-map {
-  width: 100vw;
+  /* margin-top: 2em; */
+  width: 90vw;
   background-color: whitesmoke;
   padding: 1.5em;
 
-  display:flex;
+  display: inline-flex;
   justify-content: left;
   align-content: stretch;
   flex-wrap: wrap;
   flex-direction: row;
   gap: 1em;
+}
+
+header.for-browse-pages {
+  margin-left: 2em;
+  margin-top: 10vh;
+  height:11vh;
+  width: 100vw;
+  color: #ADE576;
+  background-color: whitesmoke;
+
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  padding-left: 1em;
+  padding-right: 2em;
 }
 
