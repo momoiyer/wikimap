@@ -21,12 +21,12 @@ $(() => {
     $loadHomePage();
   });
 
-  const $kids = $('.mobile-top-nav').children();
-  $kids.hover(function() {
+  // const $kids = $('.mobile-top-nav').children();
+  $('#btnHome').hover(function() {
     $(this).addClass('fa-bounce');
   }, function() { $(this).removeClass('fa-bounce'); });
 
   $("#menu").click(function() {
     $("#drop-down").slideToggle();
-  })
+  });
 });
