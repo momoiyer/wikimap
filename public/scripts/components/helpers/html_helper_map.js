@@ -7,11 +7,11 @@ const renderMapCard = function(map) {
         </div>
         <div>
           <h6>${map.title}</h6>
-          <p><small>created on:${map.created_date}</small></p>
+          <p>created on: ${map.created_date}</p>
         </div>
       </header>
       <footer>
-        <i class="fa-solid fa-heart"></i>
+        <i class="fa-solid fa-lg fa-heart"></i>
       </footer>
     </article>
     `;

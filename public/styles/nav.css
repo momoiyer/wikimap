@@ -6,7 +6,7 @@
     padding-left: 2em;
     padding-right: 2em;
     background-color:#B4D0C6;
-    font-size: small;
+    font-size: medium;
     text-align: center;
     display: flex;
       flex-direction: row;
@@ -130,7 +130,7 @@ span.iconic {
 
 span.desktop-nav:hover {
   color: white;
-  font-size: small;
+  
 }
 
 

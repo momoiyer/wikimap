@@ -34,6 +34,10 @@
     margin-left:2em;
   }
 
+  section.scrolling-wrapper:hover {
+    box-shadow: 3px 3px 3px #99708E;
+  }
+
 
   div.inner-scroll {
     padding-left: 10em;
@@ -60,9 +64,6 @@
   }
 
 
-  .fa-heart {
-    color: #CDDDBB;
-  }
 
   /* ON CLICK ADD CLASS .is-favourite */
 
@@ -70,9 +71,7 @@
     color: #99708E;
   }
 
-  .fa-heart:hover {
-    color: #ADE576;
-  }
+
 
  header img.map-point {
     height: 7em;

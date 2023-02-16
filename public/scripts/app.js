@@ -23,8 +23,8 @@ $(() => {
 
   const $kids = $('.mobile-top-nav').children();
   $kids.hover(function() {
-    $(this).addClass('fa-bounce');
-  }, function() { $(this).removeClass('fa-bounce'); });
+    $('#logo').addClass('fa-bounce');
+  }, function() { $('#logo').removeClass('fa-bounce'); });
 
   $("#menu").click(function() {
     $("#drop-down").slideToggle();

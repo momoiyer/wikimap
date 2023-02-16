@@ -87,6 +87,8 @@ article#map-card-for-detail-page {
   padding: 1em;
 }
 
+
+
 article.add-point-card {
   height: 100px;
   width: auto;
@@ -95,7 +97,7 @@ article.add-point-card {
   border-style: solid;
   border-color: transparent;
   border-radius: 10px;
-  padding: 1em;
+  padding: 1.5em;
   margin-bottom: 1em;
 
   background-color: #DFDDE3;
@@ -108,6 +110,8 @@ article.add-point-card {
 }
 
 article.point-card p {
+
+  font-weight: 600;
   display: flex;
   overflow-wrap: break-word;
   white-space: pre-wrap;
@@ -128,7 +132,7 @@ article.point-card {
   margin-bottom: 1em;
 
   background-color: #C3D6AE;
-  font-size: x-small;
+  font-size: small;
 
   border-style: solid;
   border-color: transparent;
@@ -206,3 +210,5 @@ form {
   padding: 1em;
   margin-left: 0.8em;
 }
+
+
