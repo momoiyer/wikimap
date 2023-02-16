@@ -2,6 +2,19 @@ const express = require('express');
 const router = express.Router();
 const pointQueries = require('../db/queries/points-queries');
 
+router.get('/:mapid', (req, res) => {
+  const mapId = req.params.mapid;
+  pointQueries.getPointsDetailsByMapId(mapId)
+    .then(results => {
+      console.log("results:", results);
+      return res.json({ results });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
 
 //change this to get body from req.body and userId from cookie
 //check if map_id need to be passed from route or inside the object?

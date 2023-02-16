@@ -3,13 +3,13 @@ const db = require('../connection');
 const getUserProfileByUserId = (userId) => {
 
   return db.query(`SELECT * FROM users
-  WHERE id = $1;`,[userId])
-  .then(data => {
-    return data.rows[0];
-  })
-  .catch(err => {
-    return console.err(err);
-  })
+  WHERE id = $1;`, [userId])
+    .then(data => {
+      return data.rows[0];
+    })
+    .catch(err => {
+      return console.err(err);
+    });
 };
 
 const getMyMapDetailsByUserId = (userId) => {
@@ -25,7 +25,8 @@ const getMyMapDetailsByUserId = (userId) => {
   FROM maps
   JOIN users ON users.id = maps.owner_id
   LEFT JOIN (
-    SELECT DISTINCT map_id, image_url
+    SELECT  DISTINCT ON(map_id)
+    map_id, image_url
     FROM points
     WHERE image_url <> $1) as images
       ON maps.id = images.map_id
@@ -51,13 +52,13 @@ const getMyMapDetailsByUserId = (userId) => {
 
 const getUserNameByUserId = (userId) => {
   return db.query(`SELECT name FROM users
-  WHERE id = $1;`,[userId])
-  .then(data => {
-    return data.rows[0];
-  })
-  .catch(err => {
-    return console.err(err);
-  })
+  WHERE id = $1;`, [userId])
+    .then(data => {
+      return data.rows[0];
+    })
+    .catch(err => {
+      return console.err(err);
+    });
 
 };
 
@@ -65,4 +66,4 @@ module.exports = {
   getUserNameByUserId,
   getUserProfileByUserId,
   getMyMapDetailsByUserId
- };
+};

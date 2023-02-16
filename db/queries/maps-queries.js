@@ -23,7 +23,8 @@ const getAllMapsDetails = () => {
   FROM maps
   JOIN users ON users.id = maps.owner_id
   LEFT JOIN (
-    SELECT DISTINCT map_id, image_url
+    SELECT DISTINCT ON(map_id)
+     map_id, image_url
     FROM points
     WHERE image_url <> $1) as images
     ON maps.id = images.map_id
@@ -31,6 +32,9 @@ const getAllMapsDetails = () => {
   ORDER BY created_date;
   `;
   const param = [`${DEFAULT_POINT_IMAGE_URL}`];
+
+  console.log("sql:", query);
+  console.log("param:", param);
 
   return db.query(query, param)
     .then(data => {
@@ -55,7 +59,8 @@ const getAllMapsDetailsByUserId = (userId) => {
   FROM maps
   JOIN users ON users.id = maps.owner_id
   LEFT JOIN (
-    SELECT DISTINCT map_id, image_url
+    SELECT DISTINCT ON(map_id)
+     map_id, image_url
     FROM points
     WHERE image_url <> $1) as images
       ON maps.id = images.map_id
@@ -137,7 +142,8 @@ const getMyMaps = (userId) => {
   FROM maps
   JOIN users ON users.id = maps.owner_id
   LEFT JOIN (
-    SELECT DISTINCT map_id, image_url
+    SELECT  DISTINCT ON(map_id)
+    map_id, image_url
     FROM points
     WHERE image_url <> $1) as images
       ON maps.id = images.map_id

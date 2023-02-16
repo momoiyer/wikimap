@@ -7,21 +7,21 @@ const getFavouriteMapIdsAsArrayByUserId = (userId) => {
     JOIN favourites ON maps.id = favourites.map_id
     WHERE favourites.user_id = $1
     ORDER BY maps.created_date DESC;`, [userId])
-  .then(data => {
-    const mapIds = data.rows.map( (element) => {
-      return element.id;
+    .then(data => {
+      const mapIds = data.rows.map((element) => {
+        return element.id;
+      });
+      return mapIds;
     })
-    return mapIds;
-  })
-  .catch(err => {
-    return console.err(err);
-  })
+    .catch(err => {
+      return console.err(err);
+    });
 };
 
 //for userpage carousel, and my favourites page
 
 const getMapDetailsForFavouriteMapsByUserId = (userId) => {
-  return db.query( `
+  return db.query(`
   SELECT maps.*, users.name as onwer_name,
     CASE WHEN images.image_url IS NULL
     THEN $1
@@ -33,7 +33,8 @@ const getMapDetailsForFavouriteMapsByUserId = (userId) => {
   FROM maps
   JOIN users ON users.id = maps.owner_id
   LEFT JOIN (
-    SELECT DISTINCT map_id, image_url
+    SELECT  DISTINCT ON(map_id)
+    map_id, image_url
     FROM points
     WHERE image_url <> $1) as images
       ON maps.id = images.map_id
@@ -50,12 +51,12 @@ const getMapDetailsForFavouriteMapsByUserId = (userId) => {
   AND maps.delete_status = FALSE
   ORDER BY created_date;
   `, [DEFAULT_POINT_IMAGE_URL, userId])
-  .then(data => {
-    return data.rows;
-  })
-  .catch(err => {
-    return console.error(err);
-  })
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return console.error(err);
+    });
 };
 
 //for click handler post route
@@ -63,12 +64,12 @@ const removeMapFromFavouritesByUserId = (userId, mapId) => {
   return db.query(`DELETE FROM favourites
   WHERE user_id = $1 AND map_id =$2
   RETURNING*;`, [userId, mapId])
-  .then(data => {
-    return data.rows;
-  })
-  .catch(err => {
-    return console.err(err);
-  })
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return console.err(err);
+    });
 };
 
 //for click handler post route
@@ -76,12 +77,12 @@ const addMapToFavouritesByUserId = (userId, mapId) => {
   return db.query(`INSERT INTO favourites (user_id, map_id)
   VALUES ($1, $2)
   RETURNING*;`, [userId, mapId])
-  .then(data => {
-    return data.rows;
-  })
-  .catch(err => {
-    return console.err(err);
-  })
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return console.err(err);
+    });
 };
 
 module.exports = {

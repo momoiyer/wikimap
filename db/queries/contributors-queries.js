@@ -20,21 +20,21 @@ const getContributedMapIdsAsArrayByUserId = (userId) => {
   JOIN contributors ON maps.id = contributors.map_id
   WHERE contributors.user_id = $1
   ORDER BY maps.created_date DESC;`, [userId])
-  .then(data => {
-    const mapIds = data.rows.map( (element) => {
-      return element.id;
+    .then(data => {
+      const mapIds = data.rows.map((element) => {
+        return element.id;
+      });
+      return mapIds;
     })
-    return mapIds;
-  })
-  .catch(err => {
-    return console.error(err);
-  })
+    .catch(err => {
+      return console.error(err);
+    });
 };
 
 
 
 const getMapDetailsForContributedMapsByUserId = (userId) => {
-  return db.query( `
+  return db.query(`
   SELECT maps.*, users.name as onwer_name,
     CASE WHEN images.image_url IS NULL
     THEN $1
@@ -46,7 +46,8 @@ const getMapDetailsForContributedMapsByUserId = (userId) => {
   FROM maps
   JOIN users ON users.id = maps.owner_id
   LEFT JOIN (
-    SELECT DISTINCT map_id, image_url
+    SELECT  DISTINCT ON(map_id)
+    map_id, image_url
     FROM points
     WHERE image_url <> $1) as images
       ON maps.id = images.map_id
@@ -63,12 +64,12 @@ const getMapDetailsForContributedMapsByUserId = (userId) => {
     AND maps.delete_status = FALSE
   ORDER BY created_date;
   `, [DEFAULT_POINT_IMAGE_URL, userId])
-  .then(data => {
-    return data.rows;
-  })
-  .catch(err => {
-    return console.error(err);
-  })
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return console.error(err);
+    });
 };
 
 //for the manage contributors section on map details page
@@ -76,12 +77,12 @@ const removeContributorsFromMapByUserId = (userId, mapId) => {
   return db.query(`DELETE FROM contributors
   WHERE user_id = $1 AND map_id =$2
   RETURNING*;`, [userId, mapId])
-  .then(data => {
-    return data.rows;
-  })
-  .catch(err => {
-    return console.error(err);
-  })
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return console.error(err);
+    });
 };
 
 //get username by id function in user-queries file
@@ -91,19 +92,19 @@ const addContributorsToMapByUserId = (userId, mapId) => {
   return db.query(`INSERT INTO contributors (user_id, map_id)
   VALUES ($1, $2)
   RETURNING*;`, [userId, mapId])
-  .then(data => {
-    return data.rows;
-  })
-  .catch(err => {
-    return console.error(err);
-  })
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return console.error(err);
+    });
 };
 
 
 
 const getUserIdByName = (userId) => {
 
-}
+};
 
 
 
@@ -112,12 +113,12 @@ const getContributorsByMapId = (mapId) => {
   FROM contributors
   LEFT JOIN users ON users.id = contributors.user_id
   WHERE map_id = $1;`, [mapId])
-  .then(data => {
-    return data.rows;
-  })
-  .catch(err => {
-    return console.err(err);
-  })
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return console.err(err);
+    });
 };
 
 module.exports = {
@@ -126,4 +127,4 @@ module.exports = {
   removeContributorsFromMapByUserId,
   getMapDetailsForContributedMapsByUserId,
   getContributorsByMapId
- };
+};

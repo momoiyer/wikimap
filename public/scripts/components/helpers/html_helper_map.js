@@ -7,7 +7,6 @@ const renderMapCard = function(map) {
         </div>
         <div>
           <h6>${map.title}</h6>
-          <p>${map.description}</p>
           <p><small>created on:${map.created_date}</small></p>
         </div>
       </header>
