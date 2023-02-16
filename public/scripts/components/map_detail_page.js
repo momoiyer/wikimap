@@ -19,7 +19,6 @@ const renderInitialMapDetailPage = function() {
       <!-- delete map button manage contributors form, interactive map -->
       <div id="right-half">
       <div class="map-options"><span id="btnManageContributors">manage contributors&nbsp;<i class="fa-solid fa-chevron-down"></i></span>
-          <span id="btngetMapToEdit">edit map&nbsp;<i  class="edit fa-regular  fa-pen-to-square"></i></span>
           <span id="delete-map">delete map&nbsp;<i  class="delete fa-solid  fa-trash-can"></i></span>
         </div>
         <section class="contributors-form"></section>
@@ -144,4 +143,28 @@ $(() => {
       loadMapDetailPage(mapId);
     });
   }));
+
+  $('body').on('click', '#delete-map', function() {
+    const mapId = $('#mapId').val();
+    const messgage = "Are you sure you want to delete current map?";
+    if (confirm(messgage) == true) {
+      deleteMap(mapId).then(function(json) {
+        console.log("json result: ", json);
+        $loadHomePage();
+      });
+    }
+  });
+
+  $('body').on('click', '#delete-point', function() {
+    const pointId = $('#pointId').val();
+    const messgage = "Are you sure you want to delete current point?";
+    if (confirm(messgage) == true) {
+      console.log("pointId result: ", pointId);
+      // deleteMap(pointId).then(function(json) {
+      //   console.log("json result: ", json);
+      //   $loadHomePage();
+      // });
+    }
+  });
+
 });

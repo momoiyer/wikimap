@@ -3,7 +3,7 @@ const renderMapCardForDetailPage = function(map) {
   <header>
     <div>
       <input type="hidden" id="mapId" name="mapId" value="${map.id}">
-      <p id="title-heart">${map.title}<i class="fa-solid fa-heart"></i></p>
+      <p id="title-heart">${map.title}<i class="fa-solid fa-heart"></i> <span id="btngetMapToEdit">edit map&nbsp;<i  class="edit fa-regular  fa-pen-to-square"></i></span></p>
       <p>${map.description}</p>
       <p><small>created on:${map.created_date}</small></p>
     </div>
@@ -89,9 +89,10 @@ const renderPointCard = function(point) {
   <article class="point-card">
     <div>
       <img id="point-img" src="${point.image_url}">
+      <input type="hidden" id="pointId" name="pointId" value="${point.id}">
       <div class="edit-delete-point">
         <i class="edit fa-regular fa-lg fa-pen-to-square">&nbsp;</i>
-        <i class="delete fa-solid fa-lg fa-trash-can">&nbsp;</i>
+        <i class="delete fa-solid fa-lg fa-trash-can" id="delete-point">&nbsp;</i>
       </div>
     </div>
     <div>
