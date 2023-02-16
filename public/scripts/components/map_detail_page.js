@@ -18,7 +18,7 @@ const renderInitialMapDetailPage = function() {
       </div>
       <!-- delete map button manage contributors form, interactive map -->
       <div id="right-half">
-        <div class="map-options"><span id="btnManageContributors">manage contributors</span>
+      <div class="map-options"><span id="btnManageContributors">manage contributors&nbsp;<i class="fa-solid fa-chevron-down"></i></span>
           <span id="btngetMapToEdit">edit map&nbsp;<i  class="edit fa-regular  fa-pen-to-square"></i></span>
           <span id="delete-map">delete map&nbsp;<i  class="delete fa-solid  fa-trash-can"></i></span>
         </div>
@@ -53,9 +53,9 @@ const loadMapDetailPage = function(mapId) {
     //append contributor section and hide
     const mapId = $('#mapId').val();
     getContributors(mapId).then(function(json) {
-      const $contributorForm = renderManageContributorForm(json.listOfContributors);
-      const $mapCardForDetailPage = $('#map-card-for-detail-page');
-      $mapCardForDetailPage.append($contributorForm);
+      const $contributorsForm = renderManageContributorForm(json.listOfContributors);
+      const $contributorsFormSection = $('.contributors-form');
+      $contributorsFormSection.append($contributorsForm);
 
       $(".manage-contributors").hide(); //may be change this with hidden css
     });
@@ -101,12 +101,6 @@ $(() => {
     });
   });
 
-  $('body').on('click', '#btnCreateMap', function() {
-    const $mapEditForm = renderCreateMapForm();
-    mountDetailPage($mapEditForm);
-    $('#right-half').hide();
-    $('#points-list').hide();
-  });
 
   $('body').on('click', '#btnManageContributors', function() {
     $(".manage-contributors").slideToggle("slow", function() { });
@@ -121,14 +115,33 @@ $(() => {
     $('.add-point-form').slideDown();
   });
 
+
+  $('body').on('click', '#btnCreateMap', function() {
+    const $mapEditForm = renderCreateMapForm();
+    mountDetailPage($mapEditForm);
+    $('#right-half').hide();
+    $('#points-list').hide();
+  });
+
   $("body").on('submit', ".new-map", (function(event) {
     // prevent the default form submission behaviour
     event.preventDefault();
     // $('.new-map').on('submit', function(event) {
     event.preventDefault();
-    console.log("here to save map!");
-    const createMapString = $(this).serialize();
-    console.log("createMapString:", createMapString);
 
+    const createMapString = $(this).serialize().replaceAll("%20", " ");
+    const splitedTextArray = createMapString.split('&');
+    const title = splitedTextArray[0].slice(6);
+    const description = splitedTextArray[1].slice(12);
+    const input = {
+      title,
+      description
+    };
+    console.log("input>>", input);
+    addNewMap(input).then(function(json) {
+      console.log("json: ", json);
+      const mapId = json.map[0].id;
+      loadMapDetailPage(mapId);
+    });
   }));
 });

@@ -28,7 +28,7 @@ const renderMapCardCollection = function(data, element) {
 };
 
 function resetPage(element) {
-  element.empty();
+  element.remove();
 };
 
 const renderMapListingInitial = function(data) {
