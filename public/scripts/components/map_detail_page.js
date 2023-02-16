@@ -45,9 +45,7 @@ const loadMapDetailPage = function(mapId) {
 
     //append point data section
     const pointData = json.results[1];
-    const $pointsCollection = renderPointCardCollection(pointData);
-    const $addPointCardArticle = $('.add-point-card');
-    $addPointCardArticle.after($pointsCollection);
+    appendPointSection(pointData);
 
     //append contributor section and hide
     const mapId = $('#mapId').val();
@@ -77,6 +75,14 @@ const mountDetailPage = function($mapCard) {
   //append map data section
   const $mapCardForDetailPage = $('#map-card-for-detail-page');
   $mapCardForDetailPage.append($mapCard);
+};
+
+const appendPointSection = function(points) {
+  const $pointCardsCollection = $('#point-collection');
+  $pointCardsCollection.remove();
+  const $pointsCollection = renderPointCardCollection(points);
+  const $addPointCardArticle = $('.add-point-card');
+  $addPointCardArticle.after($pointsCollection);
 };
 
 $(() => {
@@ -155,14 +161,20 @@ $(() => {
   });
 
   $('body').on('click', '#delete-point', function() {
-    const pointId = $('#pointId').val();
+    const parent = this.parentNode;
+    const pointId = $(parent).find("#pointId").val();
     const messgage = "Are you sure you want to delete current point?";
     if (confirm(messgage) == true) {
-      console.log("pointId result: ", pointId);
-      // deleteMap(pointId).then(function(json) {
-      //   console.log("json result: ", json);
-      //   $loadHomePage();
-      // });
+      const mapId = $('#mapId').val();
+      console.log("mapId result: ", mapId);
+      deletePoint(pointId)
+        .then(function(json) {
+          return getPoints(mapId);
+        })
+        .then(function(json) {
+          const pointData = json.results;
+          appendPointSection(pointData);
+        });
     }
   });
 

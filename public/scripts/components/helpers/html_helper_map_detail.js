@@ -89,8 +89,9 @@ const renderPointCard = function(point) {
   <article class="point-card">
     <div>
       <img id="point-img" src="${point.image_url}">
-      <input type="hidden" id="pointId" name="pointId" value="${point.id}">
       <div class="edit-delete-point">
+
+      <input type="hidden" id="pointId" name="pointId" value="${point.id}">
         <i class="edit fa-regular fa-lg fa-pen-to-square">&nbsp;</i>
         <i class="delete fa-solid fa-lg fa-trash-can" id="delete-point">&nbsp;</i>
       </div>
@@ -110,11 +111,12 @@ const renderPointCard = function(point) {
 };
 
 const renderPointCardCollection = function(points) {
-  let $html = "";
+  let $html = '<section id="point-collection">';
   points.forEach(point => {
     const $pointCard = renderPointCard(point);
     $html += $pointCard;
   });
+  $html += '</section>';
   return $html;
 };
 

@@ -78,6 +78,13 @@ function deleteMap(mapId, data) {
 
 // POINT RELATED ROUTES //
 
+function getPoints(mapId) {
+  return $.ajax({
+    method: "GET",
+    url: `/api/points/${mapId}`
+  });
+}
+
 function addNewPoint(data) {
   return $.ajax({
     method: "POST",
