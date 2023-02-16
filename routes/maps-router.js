@@ -108,8 +108,8 @@ router.post('/:mapid/delete', (req, res) => {
 //change this to get body from req.body
 router.post('/:mapid', (req, res) => {
   const mapId = req.params.mapid;
-  // const updateBody = req.body;
-  const body = { title: 'Edited Title', description: 'Edited Description' };
+  const body = req.body;
+  // const body = { title: 'Edited Title', description: 'Edited Description' };
   mapQueries.updateMap(mapId, body)
     .then(map => {
       res.json({ map });

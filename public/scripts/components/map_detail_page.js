@@ -130,8 +130,6 @@ $(() => {
   $("body").on('submit', ".new-map", (function(event) {
     // prevent the default form submission behaviour
     event.preventDefault();
-    // $('.new-map').on('submit', function(event) {
-    event.preventDefault();
 
     const createMapString = $(this).serialize().replaceAll("%20", " ");
     const splitedTextArray = createMapString.split('&');
@@ -143,6 +141,29 @@ $(() => {
     };
     console.log("input>>", input);
     addNewMap(input).then(function(json) {
+      console.log("json: ", json);
+      const mapId = json.map[0].id;
+      loadMapDetailPage(mapId);
+    });
+  }));
+
+  $("body").on('submit', ".edit-map", (function(event) {
+    // prevent the default form submission behaviour
+    event.preventDefault();
+
+    const editMapString = $(this).serialize().replaceAll("%20", " ");
+    const splitedTextArray = editMapString.split('&');
+    console.log("splitedTextArray: ", splitedTextArray);
+    const mapId = splitedTextArray[0].slice(6);
+    const title = splitedTextArray[1].slice(6);
+    const description = splitedTextArray[2].slice(12);
+    const input = {
+      title,
+      description
+    };
+    console.log("input>>", input);
+    console.log("mapId>>", mapId);
+    updateMap(mapId, input).then(function(json) {
       console.log("json: ", json);
       const mapId = json.map[0].id;
       loadMapDetailPage(mapId);
