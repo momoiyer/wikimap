@@ -35,7 +35,7 @@ const getContributedMapIdsAsArrayByUserId = (userId) => {
 
 const getMapDetailsForContributedMapsByUserId = (userId) => {
   return db.query(`
-  SELECT maps.*, users.name as onwer_name,
+  SELECT maps.id,title,description,to_char(created_date, 'dd-Mon-yyyy') as created_date ,delete_status,owner_id, users.name as onwer_name,
     CASE WHEN images.image_url IS NULL
     THEN $1
     ELSE images.image_url

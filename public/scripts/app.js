@@ -20,4 +20,10 @@ $(() => {
   $("#btnHome").click(function() {
     $loadHomePage();
   });
+
+  const $kids = $('.mobile-top-nav').children();
+  $kids.hover(function() {
+    $(this).addClass('fa-bounce');
+  }, function() { $(this).removeClass('fa-bounce'); });
+
 });

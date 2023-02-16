@@ -28,6 +28,7 @@ const renderMapEditForm = function(map) {
       <input type="text" name="description" class="form-control" id="map-description" value="${map.description}">
     </div >
     <button type="submit" class="btn btn-outline-dark btn-small">save</button>
+    <button type="button" class="btn btn-outline-dark btn-small" id="cancel-edit-map">cancel</button>
   </form >
   `;
   return $html;
@@ -92,7 +93,7 @@ const renderPointCard = function(point) {
       <div class="edit-delete-point">
 
       <input type="hidden" id="pointId" name="pointId" value="${point.id}">
-        <i class="edit fa-regular fa-lg fa-pen-to-square">&nbsp;</i>
+        <i class="edit fa-regular fa-lg fa-pen-to-square" id="edit-point">&nbsp;</i>
         <i class="delete fa-solid fa-lg fa-trash-can" id="delete-point">&nbsp;</i>
       </div>
     </div>
@@ -139,21 +140,22 @@ const renderAddPoint = function() {
     </div>
     <div class="form-group">
       <label for="address_line_1">primary address information</label>
-      <input type="text" name="address_line_1" class="form-control" id="address_line_1" >
+      <input type="text" name="address_line_1" disabled class="form-control" id="address_line_1" >
     </div >
     <div class="form-group">
       <label for="address_line_2">secondary address information</label>
-      <input type="text" name="address_line_2" class="form-control" id="address_line_2">
+      <input type="text" name="address_line_2" disabled class="form-control" id="address_line_2">
       </div>
             <div class="form-group">
               <label for="latitude">latitude</label>
-              <input type="text" name="latitude" class="form-control" id="latitude" >
+              <input type="text" name="latitude" disabled class="form-control" id="latitude" >
             </div>
             <div class="form-group">
               <label for="longitude">longitude</label>
-              <input type="text" name="longitude" class="form-control" id="longitude" >
+              <input type="text" name="longitude" disabled class="form-control" id="longitude" >
             </div>
-            <button type="submit" class="btn btn-outline-dark btn-small">add</button>
+            <button type="submit" class="btn btn-outline-dark btn-small">Add</button>
+            <button type="button" class="btn btn-outline-dark btn-small" id='cancel-edit-point'>Cancel</button>
           </form >
   `;
   return $html;

@@ -15,7 +15,7 @@ const getMaps = () => {
 //get map display data for home page of non-logged in user
 const getAllMapsDetails = () => {
   const query = `
-  SELECT maps.*, users.name as onwer_name,
+  SELECT maps.id,title,description,to_char(created_date, 'dd-Mon-yyyy') as created_date ,delete_status,owner_id, users.name as onwer_name,
     CASE WHEN images.image_url IS NULL
     THEN $1
     ELSE images.image_url
@@ -48,7 +48,7 @@ const getAllMapsDetails = () => {
 //get map display data for home page of logged in user
 const getAllMapsDetailsByUserId = (userId) => {
   const query = `
-  SELECT maps.*, users.name as onwer_name,
+  SELECT maps.id,title,description,to_char(created_date, 'dd-Mon-yyyy') as created_date ,delete_status,owner_id, users.name as onwer_name,
     CASE WHEN images.image_url IS NULL
     THEN $1
     ELSE images.image_url
@@ -87,7 +87,7 @@ const getAllMapsDetailsByUserId = (userId) => {
 //get map detail data by mapId for map detail page of non-logged in user
 const getMapDetailsByMapId = (mapId) => {
   const query = `
-    SELECT maps.*, users.name as onwer_name
+    SELECT maps.id,title,description,to_char(created_date, 'dd-Mon-yyyy') as created_date ,delete_status,owner_id, users.name as onwer_name
     FROM maps
     JOIN users
       ON users.id = maps.owner_id
@@ -105,7 +105,7 @@ const getMapDetailsByMapId = (mapId) => {
 //get map detail data by mapId for map detail page of logged in user
 const getMapDetailsByMapIdNUserId = (mapId, userId) => {
   const query = `
-    SELECT maps.*, users.name as onwer_name,
+    SELECT maps.id,title,description,to_char(created_date, 'dd-Mon-yyyy') as created_date ,delete_status,owner_id, users.name as onwer_name,
       CASE WHEN favouriteMaps.map_id IS NULL
       THEN FALSE
       ELSE TRUE END as isFavourite
@@ -131,7 +131,7 @@ const getMapDetailsByMapIdNUserId = (mapId, userId) => {
 //get all maps owned by logged in user for My Maps page
 const getMyMaps = (userId) => {
   const query = `
-  SELECT maps.*, users.name as onwer_name,
+  SELECT maps.id,title,description,to_char(created_date, 'dd-Mon-yyyy') as created_date ,delete_status,owner_id, users.name as onwer_name,
     CASE WHEN images.image_url IS NULL
     THEN $1
     ELSE images.image_url

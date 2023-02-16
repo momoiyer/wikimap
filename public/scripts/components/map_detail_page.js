@@ -110,16 +110,6 @@ $(() => {
     $(".manage-contributors").slideToggle("slow", function() { });
   });
 
-  $('body').on('click', '.add-point-card', function() {
-    const $addPointForm = renderAddPoint();
-    // $(this).empty();
-    const $addPointFormArticle = $('.add-point-form');
-    $addPointFormArticle.append($addPointForm);
-    $('.add-point-card').hide();
-    $('.add-point-form').slideDown();
-  });
-
-
   $('body').on('click', '#btnCreateMap', function() {
     const $mapEditForm = renderCreateMapForm();
     mountDetailPage($mapEditForm);
@@ -170,6 +160,11 @@ $(() => {
     });
   }));
 
+  $('body').on('click', '#cancel-edit-map', function() {
+    const mapId = $('#mapId').val();
+    loadMapDetailPage(mapId);
+  });
+
   $('body').on('click', '#delete-map', function() {
     const mapId = $('#mapId').val();
     const messgage = "Are you sure you want to delete current map?";
@@ -197,6 +192,23 @@ $(() => {
           appendPointSection(pointData);
         });
     }
+  });
+
+
+  $('body').on('click', '.add-point-card', function() {
+    const $addPointForm = renderAddPoint();
+    // $(this).empty();
+    const $addPointFormArticle = $('.add-point-form');
+    $addPointFormArticle.append($addPointForm);
+    $('.add-point-card').hide();
+    $('.add-point-form').slideDown();
+  });
+
+  $('body').on('click', '#edit-point', function() {
+    const parent = this.parentNode;
+    const pointId = $(parent).find("#pointId").val();
+    console.log("here to edit point: ", pointId);
+
   });
 
 });
