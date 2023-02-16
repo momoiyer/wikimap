@@ -33,9 +33,6 @@ const getAllMapsDetails = () => {
   `;
   const param = [`${DEFAULT_POINT_IMAGE_URL}`];
 
-  console.log("sql:", query);
-  console.log("param:", param);
-
   return db.query(query, param)
     .then(data => {
       return data.rows;
