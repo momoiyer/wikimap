@@ -5,11 +5,23 @@ function reverseGeocoding(lat, lng) {
 
   const url = `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lng}&apiKey=41cf5e6cbdf4420886ffe2759b04d4ca`;
 
-  fetch(url, requestOptions)
+  return fetch(url, requestOptions)
     .then(response => {
-      // console.log("fetch response:", response);
+      console.log("fetch response:", response.json);
       return response.json();
     })
-    .then(result => console.log("Reverse Geocoding Result: ", result.features[0].properties))
-    .catch(error => console.log('error', error));
+    .then((result) => {
+      const reverseGeoData = result.features[0].properties;
+      const leafletPointData = {
+        address_line_1: reverseGeoData.address_line1,
+        address_line_2: reverseGeoData.address_line2,
+        lat,
+        lng,
+      };
+      console.log("pointData object: ", leafletPointData);
+      return leafletPointData;
+    })
+    .catch((error) => {
+      console.log('error', error);
+    });
 }

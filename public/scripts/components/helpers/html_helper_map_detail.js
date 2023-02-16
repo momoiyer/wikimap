@@ -134,7 +134,7 @@ const renderAddPoint = function() {
     <div>add point to the map</div>
     <div class="form-group">
       <label for="title">point name</label>
-      <input type="text" name="name" class="form-control" id="title"  placeholder="">
+      <input type="text" name="title" class="form-control" id="title"  placeholder="">
     </div>
     <div class="form-group">
       <label for="description">description</label>
@@ -142,23 +142,27 @@ const renderAddPoint = function() {
     </div>
     <div class="form-group">
       <label for="image-url">image url</label>
-      <input type="text" name="image-url" class="form-control" id="image-url">
+      <input type="text" name="image_url" class="form-control" id="image_url">
     </div>
     <div class="form-group">
       <label for="address_line_1">primary address information</label>
       <input type="text" name="address_line_1" disabled class="form-control" id="address_line_1" >
+      <input type="hidden" name="address_line_1" class="form-control" id="address_line_1_hidden" >
     </div >
     <div class="form-group">
       <label for="address_line_2">secondary address information</label>
       <input type="text" name="address_line_2" disabled class="form-control" id="address_line_2">
+      <input type="hidden" name="address_line_2" class="form-control" id="address_line_2_hidden">
       </div>
             <div class="form-group">
               <label for="latitude">latitude</label>
               <input type="text" name="latitude" disabled class="form-control" id="latitude" >
+              <input type="hidden" name="latitude" class="form-control" id="latitude_hidden" >
             </div>
             <div class="form-group">
               <label for="longitude">longitude</label>
               <input type="text" name="longitude" disabled class="form-control" id="longitude" >
+              <input type="hidden" name="longitude" class="form-control" id="longitude_hidden" >
             </div>
             <button type="submit" class="btn btn-outline-dark btn-small">Add</button>
             <button type="button" class="btn btn-outline-dark btn-small" id='cancel-edit-point'>Cancel</button>

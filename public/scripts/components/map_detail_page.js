@@ -53,9 +53,55 @@ const loadMapDetailPage = function(mapId) {
     //append leaflet map
     const $mapSession = $('.leaflet-map');
     $mapSession.append('<div id="map"></div>');
-    loadMap();
+
+    console.log("pointData: ", pointData);
+    let coord = [];
+    if (pointData.length > 0) {
+      const firstPoint = pointData[0];
+      coord = [firstPoint.lat, firstPoint.lon];
+    }
+    const defaultCord = coord.length === 0 ? [49.2812893631339, -123.1148099151001] : coord; 89;
+
+    const leafletMap = loadMap(defaultCord);
+    console.log("leafletMap: ", leafletMap);
+    leafletMap.on('click', onMapClick);
+
+    console.log("pointData: ", pointData);
+    addPointAsMarker(pointData, leafletMap);
   });
 
+};
+
+const onMapClick = function(e) {
+  console.log('onclick result:', e);
+  // popup
+  //   .setLatLng(e.latlng)
+  //   .setContent("You clicked the map at " + e.latlng.toString())
+  //   .openOn(map);
+
+
+  reverseGeocoding(e.latlng.lat, e.latlng.lng)
+    .then((result) => {
+      const addPointFormData = [result.address_line_1, result.address_line_2, result.lat, result.lng];
+      // console.log("result: ", result);
+      console.log("addPointFormData: ", addPointFormData);
+
+      $('#address_line_1').val(addPointFormData[0]);
+      $('#address_line_1_hidden').val(addPointFormData[0]);
+      $('#address_line_2').val(addPointFormData[1]);
+      $('#address_line_2_hidden').val(addPointFormData[1]);
+      $('#latitude').val(addPointFormData[2]);
+      $('#latitude_hidden').val(addPointFormData[2]);
+      $('#longitude').val(addPointFormData[3]);
+      $('#longitude_hidden').val(addPointFormData[3]);
+    });
+};
+
+const addPointAsMarker = function(pointData, map) {
+  pointData.forEach(point => {
+    const coords = [point.lat, point.lon];
+    L.marker(coords).addTo(map);
+  });
 };
 
 const mountDetailPage = function($mapCard) {
@@ -200,7 +246,6 @@ $(() => {
     }
   });
 
-
   $('body').on('click', '.add-point-card', function() {
     const $addPointForm = renderAddPoint();
     // $(this).empty();
@@ -243,4 +288,62 @@ $(() => {
       appendContributorSection(mapId);
     });
   }));
+
+
+  $("body").on('submit', ".add-point", (function(event) {
+    // prevent the default form submission behaviour
+    event.preventDefault();
+
+    const addPointString = $(this).serialize().replaceAll("%20", " ").replaceAll("%2C", ",");
+    const splitedTextArray = addPointString.split('&');
+    console.log("splitedTextArray: ", splitedTextArray);
+
+    const title = splitedTextArray[0].slice(6);
+    const description = splitedTextArray[1].slice(12);
+    const image_url = splitedTextArray[2].slice(10);
+    const address_line_1 = splitedTextArray[3].slice(15);
+    const address_line_2 = splitedTextArray[4].slice(15);
+    const lat = splitedTextArray[5].slice(9);
+    const lon = splitedTextArray[6].slice(10);
+    const map_id = $('#mapId').val();
+
+    const input = {
+      title,
+      description,
+      image_url,
+      address_line_1,
+      address_line_2,
+      lat,
+      lon,
+      map_id
+    };
+
+    console.log("input:", input);
+
+    addNewPoint(input)
+      .then(function(json) {
+        return getPoints(map_id);
+      })
+      .then(function(json) {
+        const pointData = json.results;
+        appendPointSection(pointData);
+        // $('.add-point-form').remove();
+        // $('.add-point-card').show();
+      });
+  }));
+
+
+
+  $('body').on('click', '#cancel-edit-point', function() {
+    console.log("Cancel add/edit form");
+    //const mapId = $('#mapId').val();
+    // $('.add-point-form').remove();
+
+    // const $addPointFormArticle = $('.add-point-form');
+    // $addPointFormArticle.append($addPointForm);
+    // $('.add-point-form').slideUp();
+
+    // $('.add-point-card').show();
+
+  });
 });
