@@ -74,8 +74,9 @@ article.map-info-container small {
 
 /* ON CLICK ADD CLASS .is-favourite */
 
+
 .fa-heart.is-favourite {
-  color: #99708E;
+  color: #d1465d;
 }
 
 .fa-heart:hover {
