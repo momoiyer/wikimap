@@ -19,9 +19,12 @@ article.map-info-container {
 
 article.map-info-container:hover {
   box-shadow: 3px 3px 3px #2F4B41;
+  cursor: pointer;
+  /* margin: 15px 0; */
 }
 
 img.map-point {
+  box-shadow:  3px 3px 2px #2F4B41;
   border-radius: 12px;
   max-width: 11em;
   max-height: 11em;
@@ -81,4 +84,5 @@ article.map-info-container small {
 
 .fa-heart:hover {
   color: #2F4B41;
+  cursor: pointer;
 }

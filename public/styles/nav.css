@@ -133,6 +133,8 @@ span.iconic {
 
 span.desktop-nav:hover {
   color: white;
+  cursor: pointer;
+  /* margin: 15px 0; */
 
 }
 

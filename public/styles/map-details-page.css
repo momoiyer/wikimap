@@ -19,14 +19,17 @@ div.edit-delete-point {
 
 .fa-chevron-down:hover {
   color: #99708E;
+  cursor: pointer;
 }
 
 .fa-pen-to-square:hover {
   color: #99708E;
+  cursor: pointer;
 }
 
 .fa-trash-can:hover {
   color: red;
+  cursor: pointer;
 }
 
 /* width */
@@ -66,6 +69,7 @@ div.inside-scroll {
 }
 
 #point-img {
+  box-shadow:  3px 3px 2px #2F4B41;
   height: 120px;
   width: 120px;
   margin-right: 1em;
@@ -120,6 +124,8 @@ article.point-card p {
 article.add-point-card:hover {
   background-color: #2F4B41;
   color: white;
+  cursor: pointer;
+  /* margin: 15px 0; */
 }
 
 article.point-card {
@@ -178,14 +184,17 @@ div#right-half {
 span#btngetMapToEdit:hover {
   color: #336d59;
   font-weight: 600;
+  cursor: pointer;
 }
 
 span#delete-map:hover {
   color: red;
+  cursor: pointer;
 }
 
 span#btnManageContributors:hover {
   color: #336d59;
+  cursor: pointer;
 }
 
 
