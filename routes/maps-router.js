@@ -80,8 +80,9 @@ router.get('/', (req, res) => {
 //change this to get body from req.body and userId from cookie
 router.post('/new', (req, res) => {
   const body = req.body;
+  const userId = req.session.userid;
   // const body = { title: 'New MAP Title', description: 'New MAP Description' };
-  mapQueries.addMap(10, body)
+  mapQueries.addMap(userId, body)
     .then(map => {
       res.json({ map });
     })

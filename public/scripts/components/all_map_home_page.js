@@ -2,7 +2,8 @@ const renderInitialHomePage = function() {
   const mapInitialElements = renderMapListingInitial("Explore maps near you");
   const $allMapListingPage = $(mapInitialElements);
 
-  checkIsLoggedIn().then(function(userLoggedIn) {
+  checkIsLoggedIn().then(function(json) {
+    const userLoggedIn = json.hasUserId;
     if (!userLoggedIn) {
       $('.fa-heart').hide();
     }

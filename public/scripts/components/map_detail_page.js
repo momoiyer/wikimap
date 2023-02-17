@@ -168,27 +168,33 @@ const appendPointSection = function(points) {
 const appendContributorSection = function(mapId, onLoad = false, owner_id = -1) {
   getContributors(mapId).then(function(json) {
 
-    checkIsLoggedIn().then(function(result) {
-      const userLoggedIn = result.hasUserId;
-      if (userLoggedIn) {
-        const userId = result.userId;
-        let isContributor = false;
-        json.listOfContributors.forEach(contributor => {
-          if (contributor.user_id == userId) {
-            isContributor = true;
+    if (owner_id != -1) {
+      checkIsLoggedIn().then(function(result) {
+        const userLoggedIn = result.hasUserId;
+        if (userLoggedIn) {
+          const userId = result.userId;
+          let isContributor = false;
+          json.listOfContributors.forEach(contributor => {
+            if (contributor.user_id == userId) {
+              isContributor = true;
+            }
+          });
+
+          console.log("userId: ", userId);
+          console.log("owner_id: ", owner_id);
+          let isOwner = false;
+          if (userId == owner_id) {
+            isOwner = true;
           }
-        });
-
-        let isOwner = false;
-        if (userId == owner_id) {
-          isOwner = true;
+          console.log("isOwner: ", isOwner);
+          console.log("isContributor: ", isContributor);
+          if (!isContributor && !isOwner) {
+            $('.add-point-card').hide();
+          }
         }
-        if (!isContributor && !isOwner) {
-          $('.add-point-card').hide();
-        }
-      }
-    });
+      });
 
+    }
     const $contributorsForm = renderManageContributorForm(json.listOfContributors);
     const $contributorsFormSection = $('.contributors-form');
     $contributorsFormSection.append($contributorsForm);
