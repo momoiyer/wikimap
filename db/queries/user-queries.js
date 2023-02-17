@@ -66,7 +66,6 @@ const getUserByName = (userName) => {
   const query = `SELECT *
   FROM users
   WHERE users.name = $1;`;
-  console.log("query: ", query);
   return db.query(query, [`${userName}`])
     .then(data => {
       return data.rows[0];

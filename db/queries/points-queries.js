@@ -5,14 +5,14 @@ const getPointsDetailsByMapId = (mapId) => {
   const query = `
     SELECT points.*
     FROM points
-    WHERE map_id = $1;
+    WHERE map_id = $1
+    ORDER BY last_modified DESC;
   `;
   return db.query(query, [mapId])
     .then(data => {
       return data.rows;
     })
     .catch(err => {
-      console.log("err:", err);
       return err;
     });
 };
@@ -57,7 +57,7 @@ const addPoint = (body) => {
 
 //Update point with user provided value
 const updatePoint = (pointId, body) => {
-  let updateStatement = "";
+  let updateStatement = "last_modified = NOW(), ";
   const updateValue = [pointId];
 
   let i = 2;

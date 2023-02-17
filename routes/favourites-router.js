@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
   //console.log("userId cookie", req.session.userid)
   favouritesQueries.getMapDetailsForFavouriteMapsByUserId(userId)
     .then(faveMaps => {
-      res.json({ faveMaps});
+      res.json({ faveMaps });
       //returns an array of each map
     })
     .catch(err => {
@@ -22,39 +22,65 @@ router.get('/', (req, res) => {
 
 
 
-// adds mapid and user id to favourites
+// // adds mapid and user id to favourites
+// router.post('/:mapid', (req, res) => {
+//   const userId = req.session.userid;
+//   const mapId = req.params.mapid;
+//   favouritesQueries.addMapToFavouritesByUserId(userId, mapId)
+//     .then(addedRow => {
+//       res
+//         .json(addedRow)
+//         .sendStatus(201);
+//     })
+//     .catch(err => {
+//       res
+//         .status(500)
+//         .json({ error: err.message });
+//     });
+
+// });
+
+
+// // adds mapid and user id to favourites
+// router.delete('/:mapid', (req, res) => {
+//   const userId = req.session.userid;
+//   const mapId = req.params.mapid;
+//   favouritesQueries.removeMapFromFavouritesByUserId(userId, mapId)
+//     .then(deletedRow => {
+//       res.json(deletedRow);
+//       res.sendStatus(201);
+//     })
+//     .catch(err => {
+//       res
+//         .status(500)
+//         .json({ error: err.message });
+//     });
+// });
+
 router.post('/:mapid', (req, res) => {
   const userId = req.session.userid;
   const mapId = req.params.mapid;
-  favouritesQueries.addMapToFavouritesByUserId(userId, mapId)
-    .then(addedRow => {
-      res
-      .json(addedRow)
-      .sendStatus(201);
+  console.log("userId:", userId);
+  console.log("mapId:", mapId);
+
+  favouritesQueries.getFavouritesByUserAndMap(userId, mapId)
+    .then(favourites => {
+      console.log("favourites:", favourites);
+      if (favourites.length > 0) {
+        return favouritesQueries.removeMapFromFavouritesByUserId(userId, mapId);
+      }
+      return favouritesQueries.addMapToFavouritesByUserId(userId, mapId);
+    })
+    .then(result => {
+
+      console.log("result:", result);
+      return res.json({ result });
     })
     .catch(err => {
       res
-        .status(500)
+        .status(200)
         .json({ error: err.message });
     });
-
-})
-
-
-// adds mapid and user id to favourites
-router.delete('/:mapid', (req, res) => {
-  const userId = req.session.userid;
-  const mapId = req.params.mapid;
-  favouritesQueries.removeMapFromFavouritesByUserId(userId, mapId)
-    .then(deletedRow => {
-      res.json(deletedRow)
-      res.sendStatus(201);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-})
+});
 
 module.exports = router;

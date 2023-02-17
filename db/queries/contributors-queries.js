@@ -12,6 +12,19 @@ const { user } = require('pg/lib/defaults');
 //     });
 // };
 
+const getContributorByUserAndMap = (userId, mapId) => {
+  return db.query(`SELECT *
+  FROM contributors
+  WHERE user_id = $1
+  AND map_id = $2;
+  `, [userId, mapId])
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return console.error(err);
+    });
+};
 
 
 
@@ -74,8 +87,6 @@ const getMapDetailsForContributedMapsByUserId = (userId) => {
 
 //for the manage contributors section on map details page
 const removeContributorsFromMapByUserId = (userId, mapId) => {
-  console.log("userId: ", userId);
-  console.log("mapId: ", mapId);
   return db.query(`DELETE FROM contributors
   WHERE user_id = $1 AND map_id =$2
   RETURNING*;`, [userId, mapId])
@@ -121,5 +132,6 @@ module.exports = {
   addContributorsToMapByUserId,
   removeContributorsFromMapByUserId,
   getMapDetailsForContributedMapsByUserId,
-  getContributorsByMapId
+  getContributorsByMapId,
+  getContributorByUserAndMap,
 };

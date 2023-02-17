@@ -34,8 +34,7 @@ router.post('/new', (req, res) => {
 //change this to get body from req.body
 router.post('/:pointId', (req, res) => {
   const pointId = req.params.pointId;
-  // const updateBody = req.body;
-  const body = { title: 'Edited Title', description: 'Edited Description' };
+  const body = req.body;
   pointQueries.updatePoint(pointId, body)
     .then(point => {
       res.json({ point });

@@ -8,15 +8,6 @@ const contributorsQueries = require(`../db/queries/contributors-queries`);
 const favouritesQueries = require(`../db/queries/favourites-queries`);
 const mapQueries = require(`../db/queries/maps-queries`);
 
-router.get(`/login/:userid`, (req, res) => {
-
-  console.log('req.params.userid:', req.params.userid);
-
-  //sets cookie to user id value
-  //and we can use the cookie to look up info from database
-  req.session.userid = req.params.userid;
-  res.json(req.session.userid);
-});
 
 router.get(`/`, (req, res) => {
   const userId = req.session.userid;
@@ -48,6 +39,23 @@ router.get('/logout', (req, res) => {
   res.send('logged out');
 });
 
+router.get('/isLogin', (req, res) => {
+  console.log("here at /isLogin get! ");
+  const userId = req.session.userid;
+  const result = userId ? true : false;
+  console.log("userId result: ", result);
+  res.send(result);
+});
+
+router.get(`/login/:userid`, (req, res) => {
+
+  console.log('req.params.userid:', req.params.userid);
+
+  //sets cookie to user id value
+  //and we can use the cookie to look up info from database
+  req.session.userid = req.params.userid;
+  res.json(req.session.userid);
+});
 
 module.exports = router;
 

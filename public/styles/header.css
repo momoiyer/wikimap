@@ -6,9 +6,13 @@
   margin: 0.1em;
 }
 
+span#user-page {
+  display: none;
+}
 
 /* phone and tablet */
 @media only screen and (max-width: 1023px) {
+
 
 
 
@@ -23,8 +27,8 @@
 
     width: 100vw;
     height: 11vh;
-    background-color:whitesmoke;
-    color:#336d59;
+    background-color: whitesmoke;
+    color: #336d59;
 
     display: flex;
     text-align: right;
@@ -52,7 +56,7 @@
   header div#user-location {
     padding-right: 1em;
 
-    font-size:x-small;
+    font-size: x-small;
     display: flex;
     flex-direction: column;
 
@@ -74,7 +78,7 @@
 
     width: 100vw;
     height: 12vh;
-    color:#336d59;
+    color: #336d59;
     background-color: whitesmoke;
     display: flex;
     text-align: right;
@@ -102,7 +106,7 @@
   header div#user-location {
     padding-right: 1em;
 
-    font-size:x-small;
+    font-size: x-small;
     display: flex;
     flex-direction: column;
 

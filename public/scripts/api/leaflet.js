@@ -1,5 +1,4 @@
 const loadMap = function(coord) {
-  console.log("coord from leaflet: ", coord);
 
   // const defaultCord = !coord ? [55.021471439082184, -104.28103937834645] : coord;
 

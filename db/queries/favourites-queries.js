@@ -85,9 +85,24 @@ const addMapToFavouritesByUserId = (userId, mapId) => {
     });
 };
 
+const getFavouritesByUserAndMap = (userId, mapId) => {
+  return db.query(`SELECT *
+  FROM favourites
+  WHERE user_id = $1
+  AND map_id = $2;
+  `, [userId, mapId])
+    .then(data => {
+      return data.rows;
+    })
+    .catch(err => {
+      return console.error(err);
+    });
+};
+
 module.exports = {
   getFavouriteMapIdsAsArrayByUserId,
   getMapDetailsForFavouriteMapsByUserId,
   removeMapFromFavouritesByUserId,
   addMapToFavouritesByUserId,
+  getFavouritesByUserAndMap,
 };

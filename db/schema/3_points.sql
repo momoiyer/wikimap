@@ -8,6 +8,7 @@ CREATE TABLE points (
   address_line_2 VARCHAR(255) NOT NULL,
   lat DECIMAL NOT NULL,
   lon DECIMAL NOT NULL,
-  image_url VARCHAR(355) DEFAULT 'https://cdn.pixabay.com/photo/2022/04/24/08/08/park-7153125__340.png',
-  map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE NOT NULL
+  image_url TEXT DEFAULT 'https://cdn.pixabay.com/photo/2022/04/24/08/08/park-7153125__340.png',
+  map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE NOT NULL,
+  last_modified TIMESTAMP DEFAULT NOW()
   );

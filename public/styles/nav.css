@@ -1,39 +1,40 @@
 /* phone and tablet */
 
-  nav {
-    height: 10vh;
-    width: 100vw;
-    padding-left: 2em;
-    padding-right: 2em;
-    background-color:#B4D0C6;
-    font-size: medium;
-    text-align: center;
-    display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-  }
+nav {
+  height: 10vh;
+  width: 100vw;
+  padding-left: 2em;
+  padding-right: 2em;
+  background-color: #B4D0C6;
+  font-size: medium;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 
 
-  nav.mobile-top-nav {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-  }
+nav.mobile-top-nav {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  #drop-down {
-    width:75vw;
-    margin-left: 1em;
-    visibility: visible;
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  /* nav.mobile-bottom-nav {
+#drop-down {
+  width: 75vw;
+  margin-left: 1em;
+  visibility: visible;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* nav.mobile-bottom-nav {
 
 
     position: fixed;
@@ -48,7 +49,7 @@
       align-items: center;
 
   } */
-  /* i.fa-bars {
+/* i.fa-bars {
     visibility:collapse;
   } */
 
@@ -65,16 +66,16 @@ span.iconic {
 @media only screen and (max-width: 1200px) {
   nav {
     height: 10vh;
-    width: 105vw;
+    width: 103vw;
     padding-left: 2em;
     padding-right: 2em;
-    background-color:#B4D0C6;
+    background-color: #B4D0C6;
     font-size: small;
     text-align: center;
     display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
 
@@ -83,34 +84,36 @@ span.iconic {
     top: 0px;
     left: 0px;
     display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   button.btn-outline-light {
     margin-right: 0.5em;
   }
 
-    i.fa-bars {
-      visibility: visible;
-      position: fixed;
-      right:2em;
-      top:2em;
-    }
+  i.fa-bars {
+    visibility: visible;
+    position: fixed;
+    right: 2em;
+    top: 2em;
+  }
 
   #drop-down {
-    display:none;
-    width:10em;
+    display: none;
+    width: 11em;
+    padding-left: 2.5em;
+    margin-left: 1em;
     border-radius: 15px;
     position: fixed;
-    right:1em;
+    right: 2.5em;
 
     background-color: #B4D0C6;
     margin-top: 20vh;
-    padding-right:1em;
+    padding-right: 1em;
     padding-top: 25vh;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     justify-self: right;
@@ -130,7 +133,7 @@ span.iconic {
 
 span.desktop-nav:hover {
   color: white;
-  
+
 }
 
 

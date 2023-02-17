@@ -29,6 +29,25 @@ const renderInitialMapDetailPage = function() {
     </section>
   `);
 
+
+  // const isUserLoggedIn = $('#userLoggedIn').val();
+  // console.log("isUserLoggedIn: ", isUserLoggedIn);
+
+  // if (isUserLoggedIn === "false") {
+  //   console.log("isUserLoggedIn: ", false);
+  // }
+  checkIsLoggedIn().then(function(userLoggedIn) {
+    if (!userLoggedIn) {
+      console.log("checkIsLoggedIn: ", false);
+      $('#btnManageContributors').hide();
+      $('#btngetMapToEdit').hide();
+      $('#delete-map').hide();
+      $('.add-point-card').hide();
+      $('.fa-heart').hide();
+      $('.edit-delete-point').hide();
+    }
+  });
+
   window.$mapDetailsPage = $mapDetailsPage;
 };
 
@@ -54,7 +73,6 @@ const loadMapDetailPage = function(mapId) {
     const $mapSession = $('.leaflet-map');
     $mapSession.append('<div id="map"></div>');
 
-    console.log("pointData: ", pointData);
     let coord = [];
     if (pointData.length > 0) {
       const firstPoint = pointData[0];
@@ -63,10 +81,8 @@ const loadMapDetailPage = function(mapId) {
     const defaultCord = coord.length === 0 ? [49.2812893631339, -123.1148099151001] : coord; 89;
 
     const leafletMap = loadMap(defaultCord);
-    console.log("leafletMap: ", leafletMap);
     leafletMap.on('click', onMapClick);
 
-    console.log("pointData: ", pointData);
     addPointAsMarker(pointData, leafletMap);
   });
 
@@ -74,17 +90,16 @@ const loadMapDetailPage = function(mapId) {
 
 const onMapClick = function(e) {
   console.log('onclick result:', e);
-  // popup
-  //   .setLatLng(e.latlng)
-  //   .setContent("You clicked the map at " + e.latlng.toString())
-  //   .openOn(map);
-
 
   reverseGeocoding(e.latlng.lat, e.latlng.lng)
     .then((result) => {
       const addPointFormData = [result.address_line_1, result.address_line_2, result.lat, result.lng];
       // console.log("result: ", result);
       console.log("addPointFormData: ", addPointFormData);
+      L.popup()
+        .setLatLng(e.latlng)
+        .setContent(`${result.address_line_1}, ${result.address_line_2}`)
+        .openOn(this);
 
       $('#address_line_1').val(addPointFormData[0]);
       $('#address_line_1_hidden').val(addPointFormData[0]);
@@ -95,12 +110,14 @@ const onMapClick = function(e) {
       $('#longitude').val(addPointFormData[3]);
       $('#longitude_hidden').val(addPointFormData[3]);
     });
+
 };
 
 const addPointAsMarker = function(pointData, map) {
   pointData.forEach(point => {
     const coords = [point.lat, point.lon];
-    L.marker(coords).addTo(map);
+    let marker = L.marker(coords).addTo(map);
+    marker.bindPopup(`${point.title}`);
   });
 };
 
@@ -139,8 +156,14 @@ const appendContributorSection = function(mapId, onLoad = false) {
 
 $(() => {
 
+
+
   renderInitialMapDetailPage();
+
+
   $('.add-point-form').hide();
+  $('#btngetMapToEdit').hide();
+
 
   $('body').on('click', '#btngetMapToEdit', function() {
     //get mapId from hidden field
@@ -148,8 +171,9 @@ $(() => {
 
     //retrieve map data to edit
     getMapToEdit(mapId).then(function(json) {
+      console.log("getMapToEdit: ", json);
       //replace map card detail session with map edit form
-      const mapData = json.results[0];
+      const mapData = json.results;
       const $mapEditForm = renderMapEditForm(mapData);
       const $mapCardForDetailPage = $('#map-card-for-detail-page');
       $mapCardForDetailPage.empty();
@@ -228,38 +252,6 @@ $(() => {
     }
   });
 
-  $('body').on('click', '#delete-point', function() {
-    const parent = this.parentNode;
-    const pointId = $(parent).find("#pointId").val();
-    const messgage = "Are you sure you want to delete current point?";
-    if (confirm(messgage) == true) {
-      const mapId = $('#mapId').val();
-      console.log("mapId result: ", mapId);
-      deletePoint(pointId)
-        .then(function(json) {
-          return getPoints(mapId);
-        })
-        .then(function(json) {
-          const pointData = json.results;
-          appendPointSection(pointData);
-        });
-    }
-  });
-
-  $('body').on('click', '.add-point-card', function() {
-    const $addPointForm = renderAddPoint();
-    // $(this).empty();
-    const $addPointFormArticle = $('.add-point-form');
-    $addPointFormArticle.append($addPointForm);
-    $('.add-point-card').hide();
-    $('.add-point-form').slideDown();
-  });
-
-  $('body').on('click', '#edit-point', function() {
-    const parent = this.parentNode;
-    const pointId = $(parent).find("#pointId").val();
-    console.log("here to edit point: ", pointId);
-  });
 
   $('body').on('click', '#delete-contributor', function() {
     const mapId = $('#mapId').val();
@@ -277,7 +269,6 @@ $(() => {
   $("body").on('submit', ".add-contributors", (function(event) {
     // prevent the default form submission behaviour
     event.preventDefault();
-
     const mapId = $('#mapId').val();
     const contributorString = $(this).serialize().replaceAll("%20", " ");
     const splitedTextArray = contributorString.split('&');
@@ -285,16 +276,31 @@ $(() => {
     const input = { mapId, userName };
     addContributorToMap(input).then(function(json) {
       console.log("json: ", json);
-      appendContributorSection(mapId);
+      if (json.error) {
+        alert(json.error);
+      }
+      else {
+        appendContributorSection(mapId);
+      }
     });
   }));
 
+
+  $('body').on('click', '.add-point-card', function() {
+    const $addPointForm = renderAddPoint();
+    const $addPointFormArticle = $('.add-point-form');
+    $('.add-point-form').empty();
+    $addPointFormArticle.append($addPointForm);
+    $('.add-point-card').hide();
+    $('.add-point-form').slideDown();
+    $('#title').focus();
+  });
 
   $("body").on('submit', ".add-point", (function(event) {
     // prevent the default form submission behaviour
     event.preventDefault();
 
-    const addPointString = $(this).serialize().replaceAll("%20", " ").replaceAll("%2C", ",");
+    const addPointString = decodeURIComponent($(this).serialize());
     const splitedTextArray = addPointString.split('&');
     console.log("splitedTextArray: ", splitedTextArray);
 
@@ -326,24 +332,131 @@ $(() => {
       })
       .then(function(json) {
         const pointData = json.results;
-        appendPointSection(pointData);
-        // $('.add-point-form').remove();
+
+        loadMapDetailPage(map_id);
+        // appendPointSection(pointData);
+
+        // $('.add-point-form').slideUp();
         // $('.add-point-card').show();
       });
   }));
 
-
-
   $('body').on('click', '#cancel-edit-point', function() {
     console.log("Cancel add/edit form");
-    //const mapId = $('#mapId').val();
-    // $('.add-point-form').remove();
+    $('.add-point-form').slideUp();
+    $('.add-point-card').show();
+  });
 
-    // const $addPointFormArticle = $('.add-point-form');
-    // $addPointFormArticle.append($addPointForm);
-    // $('.add-point-form').slideUp();
 
-    // $('.add-point-card').show();
+  $('body').on('click', '#delete-point', function() {
+    const parent = this.parentNode;
+    const pointId = $(parent).find("#pointId").val();
+    const messgage = "Are you sure you want to delete current point?";
+    if (confirm(messgage) == true) {
+      const mapId = $('#mapId').val();
+      console.log("mapId result: ", mapId);
+      deletePoint(pointId)
+        .then(function(json) {
+          return getPoints(mapId);
+        })
+        .then(function(json) {
+          const pointData = json.results;
+          appendPointSection(pointData);
+        });
+    }
+  });
+
+  $('body').on('click', '#edit-point', function() {
+
+    const parent = this.parentNode;
+    const grandParent = parent.parentNode;
+    const greatGrandParent = grandParent.parentNode;
+
+    const id = $(parent).find("#pointId").val();
+    const lat = $(parent).find("#lat").val();
+    const lon = $(parent).find("#lon").val();
+    const image_url = $(grandParent).find("#point-img").prop('src');
+    const title = $(greatGrandParent).find("#point_title").html();
+    const description = $(greatGrandParent).find("#point_desc").html();
+    const address_line_1 = $(greatGrandParent).find("#point_add1").html();
+    const address_line_2 = $(greatGrandParent).find("#point_add2").html();
+
+    const points = {
+      id,
+      image_url,
+      title,
+      description,
+      address_line_1,
+      address_line_2,
+      lat,
+      lon,
+    };
+
+    const $editPointForm = renderEditPoint(points);
+    const $addPointFormArticle = $('.add-point-form');
+    $('.add-point-form').empty();
+    $addPointFormArticle.append($editPointForm);
+    $('.add-point-card').hide();
+    $('.add-point-form').slideDown();
+    $('#title').focus();
 
   });
+
+
+  $("body").on('submit', ".edit-point", (function(event) {
+    // prevent the default form submission behaviour
+    event.preventDefault();
+
+    const parent = this.parentNode;
+    const pointId = $(parent).find("#pointId").val();
+
+    //console.log("current point to submit edit: ", pointId);
+
+    const addPointString = decodeURIComponent($(this).serialize());
+    const splitedTextArray = addPointString.split('&');
+    // console.log("splitedTextArray: ", splitedTextArray);
+    // console.log("addPointString: ", addPointString);
+    // console.log("decoded addPointString: ", decodeURIComponent(addPointString));
+
+    const point_id = splitedTextArray[0].slice(8);
+    const title = splitedTextArray[1].slice(6);
+    const description = splitedTextArray[2].slice(12);
+    const image_url = splitedTextArray[3].slice(10);
+    const address_line_1 = splitedTextArray[4].slice(15);
+    const address_line_2 = splitedTextArray[5].slice(15);
+    const lat = splitedTextArray[6].slice(9);
+    const lon = splitedTextArray[7].slice(10);
+    const map_id = $('#mapId').val();
+
+    const input = {
+      title,
+      description,
+      image_url,
+      address_line_1,
+      address_line_2,
+      lat,
+      lon,
+      map_id
+    };
+
+    console.log("input:", input);
+
+    updatePoint(point_id, input)
+      .then(function(json) {
+        console.log("json update point: ", json);
+        return getPoints(map_id);
+      })
+      .then(function(json) {
+        const pointData = json.results;
+
+        loadMapDetailPage(map_id);
+        //   appendPointSection(pointData);
+
+        //   $('.add-point-form').slideUp();
+        //   $('.add-point-card').show();
+      });
+
+  }));
 });
+
+

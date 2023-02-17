@@ -21,6 +21,13 @@ function getUserProfile() {
   });
 }
 
+function checkIsLoggedIn() {
+  return $.ajax({
+    method: "GET",
+    url: "/api/user/isLogin"
+  });
+}
+
 // MAP RELATED ROUTES //
 
 function getAllMapListings() {
@@ -148,16 +155,23 @@ function getMyFavouriteMaps() {
   });
 }
 
-function addMapToFavourites(mapId) {
+// function addMapToFavourites(mapId) {
+//   return $.ajax({
+//     method: "POST",
+//     url: `/api/favourites/${mapId}`
+//   });
+// }
+
+// function removeMapFromFavourites(mapId) {
+//   return $.ajax({
+//     method: "DELETE",
+//     url: `/api/favourites/${mapId}`
+//   });
+// }
+
+function toggleFavourite(mapId) {
   return $.ajax({
     method: "POST",
-    url: `/api/favourites/${mapId}`
-  });
-}
-
-function removeMapFromFavourites(mapId) {
-  return $.ajax({
-    method: "DELETE",
     url: `/api/favourites/${mapId}`
   });
 }

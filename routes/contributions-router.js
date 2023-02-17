@@ -46,18 +46,29 @@ router.post('/', (req, res) => {
   console.log("body : ", body);
 
   const { mapId, userName } = body;
+  let userId = 0;
 
   userQueries.getUserByName(userName)
     .then(users => {
-      const userId = users.id;
-      return contributorsQueries.addContributorsToMapByUserId(userId, mapId);
+      console.log("got getUserByName!: ", users);
+      if (users) {
+        userId = users.id;
+        return contributorsQueries.getContributorByUserAndMap(userId, mapId);
+      }
+      throw new Error("User doesn't exist");
     })
-    .then(addedRow => {
-      res.json({ addedRow });
+    .then(users => {
+      if (users.length === 0) {
+        return contributorsQueries.addContributorsToMapByUserId(userId, mapId);
+      }
+      throw new Error("User already exists");
+    })
+    .then(result => {
+      res.json({ result });
     })
     .catch(err => {
       res
-        .status(500)
+        .status(200)
         .json({ error: err.message });
     });
 });

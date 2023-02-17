@@ -1,32 +1,53 @@
 // Client facing scripts here
 // home page loading
 
+const renderNavBar = function() {
+  console.log("renderNavBar!");
+  checkIsLoggedIn().then(function(userLoggedIn) {
+    $('nav.mobile-top-nav').empty();
+    if (userLoggedIn) {
+      $('nav.mobile-top-nav').append(renderLoggedInNav());
+      $('#main-content').append('<input type="hidden" id="userLoggedIn" name="userLoggedIn" value="true">');
+
+    }
+    else {
+      $('nav.mobile-top-nav').append(renderLoggedOutNav());
+      $('#main-content').append('<input type="hidden" id="userLoggedIn" name="userLoggedIn" value="false">');
+
+    }
+  });
+};
 $(() => {
 
-  $("#btnLogin").click(function() {
-    //pass user id from the input?
-    //do we need this?
-    logIn(10);
-    alert("User Logged In");
-    $loadHomePage();
+  renderNavBar();
+
+  $('body').on('click', "#btnLogin", function() {
+    // prompt("Enter User ID");
+    let userInputId = prompt("Enter User ID", "");
+    if (userInputId != null) {
+      console.log("userInputId: ", userInputId);
+      logIn(userInputId).then(function(json) {
+        alert("User Logged In");
+        $loadHomePage();
+        renderNavBar();
+      });
+    }
+
   });
 
-  $("#btnLogout").click(function() {
+  $('body').on('click', "#btnLogout", function() {
     logout();
     alert("User Logged Out");
     $loadHomePage();
+    renderNavBar();
   });
 
-  $("#btnHome").click(function() {
+  $('body').on('click', "#btnHome", function() {
     $loadHomePage();
   });
 
-  const $kids = $('.mobile-top-nav').children();
-  $kids.hover(function() {
-    $('#logo').addClass('fa-bounce');
-  }, function() { $('#logo').removeClass('fa-bounce'); });
-
-  $("#menu").click(function() {
+  $('body').on('click', "#menu", function() {
     $("#drop-down").slideToggle();
   });
+
 });

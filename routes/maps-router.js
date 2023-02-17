@@ -11,7 +11,7 @@ const pointQueries = require('../db/queries/points-queries');
 
 router.get('/all', (req, res) => {
   const userId = req.session.userid;
-  let queryFunction = userId ? mapQueries.getAllMapsDetailsByUserId() : mapQueries.getAllMapsDetails();
+  let queryFunction = userId ? mapQueries.getAllMapsDetailsByUserId(userId) : mapQueries.getAllMapsDetails();
   queryFunction
     .then(maps => {
       res.json({ maps });
