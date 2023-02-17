@@ -36,9 +36,9 @@ const renderInitialMapDetailPage = function() {
   // if (isUserLoggedIn === "false") {
   //   console.log("isUserLoggedIn: ", false);
   // }
-  checkIsLoggedIn().then(function(userLoggedIn) {
+  checkIsLoggedIn().then(function(json) {
+    const userLoggedIn = json.hasUserId;
     if (!userLoggedIn) {
-      console.log("checkIsLoggedIn: ", false);
       $('#btnManageContributors').hide();
       $('#btngetMapToEdit').hide();
       $('#delete-map').hide();
@@ -54,8 +54,31 @@ const renderInitialMapDetailPage = function() {
 const loadMapDetailPage = function(mapId) {
   //retrieve map detail data from database
   getMapDetails(mapId).then(function(json) {
+
     //prepare for map data section
     const mapData = json.results[0];
+
+    console.log("mapData:", mapData);
+    const ownerId = mapData.owner_id;
+    console.log("ownerId:", ownerId);
+
+    const userId = $('#userId').val();
+    console.log("userId: ", userId);
+
+    checkIsLoggedIn().then(function(json) {
+      const userLoggedIn = json.hasUserId;
+      if (userLoggedIn) {
+        const userId = json.userId;
+        if (userId != ownerId) {
+          console.log("you are not the owner of the map");
+          $('#btnManageContributors').hide();
+          $('#btngetMapToEdit').hide();
+          $('#delete-map').hide();
+          // $('.add-point-card').hide();
+        }
+      }
+    });
+
     const $mapCard = renderMapCardForDetailPage(mapData);
 
     //reset and mount the page
@@ -67,7 +90,7 @@ const loadMapDetailPage = function(mapId) {
 
     //append contributor section and hide
     const mapId = $('#mapId').val();
-    appendContributorSection(mapId, true);
+    appendContributorSection(mapId, true, ownerId);
 
     //append leaflet map
     const $mapSession = $('.leaflet-map');
@@ -142,8 +165,30 @@ const appendPointSection = function(points) {
   $addPointCardArticle.after($pointsCollection);
 };
 
-const appendContributorSection = function(mapId, onLoad = false) {
+const appendContributorSection = function(mapId, onLoad = false, owner_id = -1) {
   getContributors(mapId).then(function(json) {
+
+    checkIsLoggedIn().then(function(result) {
+      const userLoggedIn = result.hasUserId;
+      if (userLoggedIn) {
+        const userId = result.userId;
+        let isContributor = false;
+        json.listOfContributors.forEach(contributor => {
+          if (contributor.user_id == userId) {
+            isContributor = true;
+          }
+        });
+
+        let isOwner = false;
+        if (userId == owner_id) {
+          isOwner = true;
+        }
+        if (!isContributor && !isOwner) {
+          $('.add-point-card').hide();
+        }
+      }
+    });
+
     const $contributorsForm = renderManageContributorForm(json.listOfContributors);
     const $contributorsFormSection = $('.contributors-form');
     $contributorsFormSection.append($contributorsForm);

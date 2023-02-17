@@ -15,10 +15,10 @@ router.get(`/`, (req, res) => {
   //returns user info
   const userPromise = userQueries.getUserProfileByUserId(userId);
   //returns details for all map categories based on user
-  const contributorPromise = contributorsQueries.getMapDetailsForContributedMapsByUserId(userId);
-  const favePromise = favouritesQueries.getMapDetailsForFavouriteMapsByUserId(userId);
   const myMapsPromise = userQueries.getMyMapDetailsByUserId(userId);
-  Promise.all([userPromise, contributorPromise, favePromise, myMapsPromise])
+  const favePromise = favouritesQueries.getMapDetailsForFavouriteMapsByUserId(userId);
+  const contributorPromise = contributorsQueries.getMapDetailsForContributedMapsByUserId(userId);
+  Promise.all([userPromise, myMapsPromise, favePromise, contributorPromise])
     .then(results => {
       res.json({ results });
     })
@@ -42,9 +42,10 @@ router.get('/logout', (req, res) => {
 router.get('/isLogin', (req, res) => {
   console.log("here at /isLogin get! ");
   const userId = req.session.userid;
-  const result = userId ? true : false;
-  console.log("userId result: ", result);
-  res.send(result);
+  const hasUserId = userId ? true : false;
+  console.log("userId result: ", hasUserId);
+  const result = { hasUserId, userId };
+  res.json(result);
 });
 
 router.get(`/login/:userid`, (req, res) => {

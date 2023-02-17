@@ -1,5 +1,5 @@
 const renderMapCard = function(map) {
-
+  map.favClass = map.isfavourite ? "is-favourite" : "";
   const $html = `
   <article class="map-info-container" id= "map-card">
       <header class="map-card-header" id="map-card-header-${map.id}">
@@ -12,19 +12,11 @@ const renderMapCard = function(map) {
         </div>
       </header>
       <footer>
-        <i class="fa-solid fa-lg fa-heart" id="favourite-${map.id}"></i>
+        <i class="fa-solid fa-lg fa-heart ${map.favClass}"  id="favourite-${map.id}"></i>
       </footer>
     </article>
     `;
 
-
-  // console.log("here to render map: ", map.isfavourite);
-  // // console.log("$('#favourite'): ", $('#favourite'));
-  // if (map.isfavourite) {
-  //   $(".fa-heart").each(function() {
-  //     $(this).addClass("is-favourite");
-  //   });
-  // }
 
 
   return $html;
@@ -34,14 +26,7 @@ const renderMapCardCollection = function(data, element) {
   data.forEach(map => {
     $mapCardListing = $(element);
     const $mapCard = renderMapCard(map);
-    if (map.isfavourite) {
-      const favElement = $(".fa-heart");
-      $.each(favElement, function() {
-        // console.log("here to add isfavourite!");
-        // console.log("this!", this);
-        $(this).addClass("is-favourite");
-      });
-    }
+
     $mapCardListing.append($mapCard);
   });
 };

@@ -3,12 +3,14 @@
 
 const renderNavBar = function() {
   console.log("renderNavBar!");
-  checkIsLoggedIn().then(function(userLoggedIn) {
+  checkIsLoggedIn().then(function(json) {
+    const userLoggedIn = json.hasUserId;
+    const userId = json.userId;
     $('nav.mobile-top-nav').empty();
     if (userLoggedIn) {
       $('nav.mobile-top-nav').append(renderLoggedInNav());
       $('#main-content').append('<input type="hidden" id="userLoggedIn" name="userLoggedIn" value="true">');
-
+      $('#main-content').append(`<input type="hidden" id="userId" name="userId" value=${userId}>`);
     }
     else {
       $('nav.mobile-top-nav').append(renderLoggedOutNav());
