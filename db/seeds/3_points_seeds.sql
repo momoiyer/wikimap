@@ -41,7 +41,7 @@ VALUES
 
 ('Science World','Wanna try Science World After Dark!','1455 Quebec St','Vancouver, BC, Canada',49.27335, -123.10383,8,'https://upload.wikimedia.org/wikipedia/commons/e/e5/Science_World_at_TELUS_World_of_Science.jpg'),
 ('Lions Gate Bridge','Fun to drive over, as long as it is not rush hour!','Lions Gate Bridge Rd','Vancouver, BC, Canada',49.31469, -123.13924,8,'https://upload.wikimedia.org/wikipedia/commons/5/5c/LionsGateBridgeTidepoolReflection.jpg'),
-('Canada Place','Best to visit right before sunset and walk along the seawall afterwards','999 Canada Pl','Vancouver, BC, V6C3T4, Canada',49.28883, -123.11118,8,'https://lh5.googleusercontent.com/p/AF1QipMXgx4mcXtTk2sM9t3Pl1GuAgiMz9I5krU6IbHW=w141-h101-n-k-no-nu'),
+('Canada Place','Best to visit right before sunset and walk along the seawall afterwards','999 Canada Pl','Vancouver, BC, V6C3T4, Canada',49.28883, -123.11118,8,'https://cdn.pixabay.com/photo/2018/09/09/02/32/canada-place-3663822_960_720.jpg'),
 
 ('Livia Sweets','Everything about this place is magical, except waiting for a table at weekend brunch.','1399 Commercial Dr','Vancouver, BC, Canada',49.272265, -123.069725,9,'https://images.dailyhive.com/20190111104114/IMG_0202.jpg'),
 ('Nemesis Coffee','Really cool building, friendly staff. The pistachio swirl is to die for!','555 Great Northern Way','Vancouver, BC, Canada',49.26705, -123.09258,9,'https://i0.wp.com/eatswithmo.com/wp-content/uploads/2021/06/20210619_084240-min-scaled.jpg?fit=2560%2C1440&ssl=1'),
