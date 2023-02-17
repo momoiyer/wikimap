@@ -61,7 +61,7 @@ router.post('/', (req, res) => {
       if (users.length === 0) {
         return contributorsQueries.addContributorsToMapByUserId(userId, mapId);
       }
-      throw new Error("User already exists");
+      throw new Error("Contributor already exists");
     })
     .then(result => {
       res.json({ result });

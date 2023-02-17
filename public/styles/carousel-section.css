@@ -1,83 +1,81 @@
 /* phone and tablet */
 /* @media only screen and (max-width: 1023px) { */
 
-  section.scrolling-wrapper {
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #B4D0C6;
-    background-color: whitesmoke;
-    color:#99708E;
-    height: 60vh;
-    width: 90%;
+section.scrolling-wrapper {
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #B4D0C6;
+  background-color: whitesmoke;
+  color: #99708E;
+  height: 60vh;
+  width: 90%;
 
-    margin-bottom: 1.5em;
-    margin-left: 1.5em;
-    margin-right: 1.5em;
-    margin-top: 1.5em;
-
-
-
-    overflow-y: hidden;
-    overflow-x: scroll;
-    white-space: nowrap;
-
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  section.scrolling-wrapper button.btn-outline-dark {
-    display:flex;
-    align-self: flex-start;
-    margin-left:2em;
-  }
-
-  section.scrolling-wrapper:hover {
-    box-shadow: 3px 3px 3px #99708E;
-  }
-
-
-  div.inner-scroll {
-    padding-left: 10em;
-    margin-left: 2.5em;
-    margin-right: 20px;
-    display: inline-flex;
-    overflow-inline: auto;
-    justify-self: center;
-    justify-content: right;
-    gap:2em;
-
-  }
+  margin-bottom: 1.5em;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  margin-top: 1.5em;
 
 
 
-  section.scrolling-wrapper  h5 {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
 
-    margin-left: 1.5em;
-    display: flex;
-    align-self: flex-start;
-    justify-self: flex-start;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+}
 
+section.scrolling-wrapper button.btn-outline-dark {
+  display: flex;
+  align-self: flex-start;
+  margin-left: 2em;
+}
 
-  }
-
-
-
-  /* ON CLICK ADD CLASS .is-favourite */
-
-  .fa-heart.is-favourite {
-    color: #99708E;
-  }
-
-
-
- header img.map-point {
-    height: 7em;
-    margin-bottom: 1em;
-
-  }
+section.scrolling-wrapper:hover {
+  box-shadow: 3px 3px 3px #99708E;
+}
 
 
+div.inner-scroll {
+  padding-left: 2em;
+  margin-left: 2em;
+  margin-right: 20px;
+  display: inline-flex;
+  overflow-inline: auto;
+  justify-self: center;
+  justify-content: right;
+  gap: 1em;
 
+}
+
+
+
+section.scrolling-wrapper h5 {
+
+  margin-left: 1.5em;
+  display: flex;
+  align-self: flex-start;
+  justify-self: flex-start;
+
+
+}
+
+
+
+/* ON CLICK ADD CLASS .is-favourite */
+
+.fa-heart.is-favourite {
+  color: #99708E;
+}
+
+
+
+header img.map-point {
+  height: 7em;
+  margin-bottom: 1em;
+
+}

@@ -9,7 +9,7 @@ VALUES
 ('Best Waterfalls in BC','Photo opportunities from our roadtrip.',8),
 ('Fave Dog Parks','Places to take my dog Ringo for his next outing.',10),
 ('Vancouver Landmarks','Tourist traps, but fun places to take my parents when they visit',8),
-('Fave Bakeries in Vancouver','Need to try each to determine who is number one!',8),
+('Bakeries in Vancouver','Need to try each to determine who is number one!',8),
 ('Vintage/Thrift Shops','Remember to check the spots our next shopping day.',8),
 ('Outdoor Pools','PLaces to go during the next heat dome',10);
 

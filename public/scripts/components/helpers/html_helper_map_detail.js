@@ -71,7 +71,7 @@ const renderManageContributorForm = function(contributors) {
     </ul >
     <form class="add-contributors">
       <div class="form-group">
-        <input type="text" name="name" class="form-control" id="name-of-contributor" placeholder="Enter New Contributor Name">
+        <input type="text" name="name" class="form-control" id="name-of-contributor" placeholder="enter new contributor name">
       </div>
       <button type="submit" class="btn btn-outline-dark btn-small" id="add-contributor">add</button>
     </form >
@@ -147,7 +147,7 @@ const renderAddPoint = function() {
     </div>
     <div class="form-group">
       <label for="image-url">image url</label>
-      <input type="text" name="image_url" class="form-control" id="image_url">
+      <input type="text" name="image_url" class="form-control" id="image_url" placeholder="optional">
     </div>
     <div class="form-group">
       <label for="address_line_1">primary address information</label>
