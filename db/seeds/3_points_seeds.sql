@@ -48,7 +48,7 @@ VALUES
 ('Breka Hastings','So convenient, open 24 hours! The apple fritter is the best.','740 W Hastings Street','Vancouver, BC, Canada',49.28575, -123.11465,9,'https://s3-media0.fl.yelpcdn.com/bphoto/4J-BJVkNZI5i0P4xxtg1Ag/348s.jpg'),
 
 ('Front & Company','Always find a lot of great stuff here.','3772 Main St','Vancouver, BC, V5V 3N7, Canada',49.25140, -123.10080,10,'https://www.bcliving.ca/media/image/99195_max.jpg'),
-('Hunter & Hare','Have to take the seabus but it is worth it!','225 Lonsdale Ave','North Vancouver, BC, V7M 2E9, Canada',49.31320, -123.07781,10,'https://www.google.com/maps/place/Hunter+%26+Hare/@49.3130567,-123.0775342,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipNyfA0_TKlyBNe3Zo5iZkj2GFByvzVKGQaoRKtW!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipNyfA0_TKlyBNe3Zo5iZkj2GFByvzVKGQaoRKtW%3Dw114-h86-k-no!7i4032!8i3024!4m7!3m6!1s0x5486715782a5f83f:0x9d77ab9a3d0c4eec!8m2!3d49.3131748!4d-123.0778105!14m1!1BCgIgARICEAE?hl=en#'),
+('Hunter & Hare','Have to take the seabus but it is worth it!','225 Lonsdale Ave','North Vancouver, BC, V7M 2E9, Canada',49.31320, -123.07781,10,'https://s3-media0.fl.yelpcdn.com/bphoto/qU81z_aHYoW4xcFcRc0nUg/o.jpg'),
 
 ('Second Beach Swimming Pool','For when you wanna see the ocean but dont want to be in it!','Stanley Park Dr','Vancouver, BC, Canada',49.29553, -123.15155,11,'http://discoversurreybc.com/wp-content/uploads/2020/06/Summer-Guide.jpg'),
 ('Hillcrest Aquatic Center','One of the best community centers around.','4575 Clancy Loranger Way','Vancouver, BC, Canada',49.24396, -123.10760,11,'https://www.edmonton.ca/sites/default/files/public-files/images/FredBPoolPhoto3.jpg');
