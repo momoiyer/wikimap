@@ -36,10 +36,41 @@ A responsive web app that allows users to collaboratively create maps which list
 
 # PROJECT OVERVIEW #
 
-## Landing Page 
-### Landing page to login with spotify account ###
-![Landing Page](documentation/pictures/home.jpg)
+## Home Page 
+### Home page after user logged in showing the map near user's location ###
+![Home Page](documentation/home.jpg)
 
+## Map Detail Page 
+### Clicking on individual map will take you to map detail page where you can see Point added to current map ###
+![Map Detail Page](documentation/mapDetails.jpg)
+
+## Map Detail Page - Edit Map Details
+### User can edit current map info like name and description of the map ###
+![Map Detail Page - Edit Map](documentation/editMap.jpg)
+
+## Map Detail Page - Add contributor 
+### Map owner can add other existing users to be the contributor of the map, that mean they can add in points to the map too ###
+![Map Detail Page - Add contributor](documentation/manageContributor.jpg)
+
+## Map Detail Page - Add new point
+### User can add new point to current map by click anywhere on the map, that will populate the fields with deatils information of selected location ###
+![Map Detail Page - Add new point](documentation/addPoint.jpg)
+
+## User Profile
+### User can view the maps they created, favourited or been shared by another user as a contributor ###
+![User Profile](documentation/profile.jpg)
+
+## Favourite Map Page
+### User can view all the map they marked as favourite ###
+![Favourite Map Page](documentation/favourite.jpg)
+
+## Share/Contributed Map Page
+### User can view all the map taht has been shared by another user as a contributor and add points in it ###
+![Share/Contributed Map Page](documentation/sharedMap.jpg)
+
+## Create New Map
+### User can create a new map and add points later from detail page ###
+![Create New Map](documentation/createMap.jpg)
 
 # PROJECT SETUP #
 
